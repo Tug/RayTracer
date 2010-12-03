@@ -8,15 +8,15 @@
 #include "Triangle.h"
 #include <vector>
 
-class Polyhedron
+class Polyhedron : public Object3D
 {
 public:
 	Polyhedron();
 	Polyhedron(Polyhedron * polyhedron);
 	Polyhedron(std::vector<Triangle *> & triangles);
 	virtual ~Polyhedron();
-	//virtual bool intersect(Ray & ray, double * distFromSource);
-	//virtual P3 getNormal(P3 & surfPoint);
+	virtual bool intersect(Ray & ray, double * distFromSource);
+	virtual P3 getNormal(P3 & surfPoint);
 	std::vector<Triangle *> & getTriangles();
 
 protected:

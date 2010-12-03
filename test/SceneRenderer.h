@@ -29,6 +29,8 @@ public:
 	void moveCamera(int x, int y);
 	Object3DRenderer * getObject3DRenderer(Object3D* object3D);
 	void initObject3DRenderers();
+	void deleteObject3DRenderers();
+	void reset();
 
 	Scene * getScene();
 	void setScene(Scene * scene);

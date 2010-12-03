@@ -154,9 +154,6 @@
     <ClCompile Include="winmain.cpp">
       <Filter>Fichiers sources\windows</Filter>
     </ClCompile>
-    <ClCompile Include="AssemblyInfo.cpp">
-      <Filter>Fichiers sources\util</Filter>
-    </ClCompile>
     <ClCompile Include="Model.cpp">
       <Filter>Fichiers sources\rendering\model</Filter>
     </ClCompile>
@@ -178,14 +175,8 @@
     <ClCompile Include="RayTracing.cpp">
       <Filter>Fichiers sources\rendering\method</Filter>
     </ClCompile>
-    <ClCompile Include="CameraScreen.cpp">
-      <Filter>Fichiers sources\rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Fichiers sources\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectManager.cpp">
-      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Fichiers sources</Filter>
@@ -237,6 +228,15 @@
     </ClCompile>
     <ClCompile Include="PlaneEditor.cpp">
       <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraScreen.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -318,9 +318,6 @@
     <ClInclude Include="Screen.h">
       <Filter>Fichiers d%27en-tête\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -390,6 +387,9 @@
     <ClInclude Include="PlaneEditor.h">
       <Filter>Fichiers d%27en-tête\gui</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -398,6 +398,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resX">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlaneEditor.resx">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SphereEditor.resx">
       <Filter>Fichiers de ressources</Filter>
     </EmbeddedResource>
   </ItemGroup>

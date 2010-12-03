@@ -2,28 +2,25 @@
 
 #include "Polyhedron.h"
 
-Polyhedron::Polyhedron() {
+Polyhedron::Polyhedron() : Object3D() {
 }
 
-Polyhedron::Polyhedron(Polyhedron * polyhedron) {
+Polyhedron::Polyhedron(Polyhedron * polyhedron) : Object3D() {
 	this->triangles = std::vector<Triangle *>(polyhedron->triangles);
 }
 
-Polyhedron::Polyhedron(std::vector<Triangle *> & triangles) {
+Polyhedron::Polyhedron(std::vector<Triangle *> & triangles) : Object3D() {
 	this->triangles = triangles;
 }
 
 Polyhedron::~Polyhedron() {
-	for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
-		delete (*it);
-	}
+	triangles.clear();
 }
 
 std::vector<Triangle *> & Polyhedron::getTriangles() {
 	return triangles;
 }
 
-/*
 bool Polyhedron::intersect(Ray & ray, double * distFromSource) {
 	double yMin = DBL_MAX;
 	bool intersec = false;
@@ -38,7 +35,7 @@ bool Polyhedron::intersect(Ray & ray, double * distFromSource) {
 	return intersec;
 }
 
-P3 Cube::getNormal(P3 & surfPoint) {
-	return lastIntersecTriangle->getNormal(surfPoint);
+P3 Polyhedron::getNormal(P3 & surfPoint) {
+	return P3(0,0,0);
 }
-*/
+

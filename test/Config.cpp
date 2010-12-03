@@ -18,8 +18,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 	file.open(fileName);
     bool parsingSuccessful = reader.parse(file, root, false);
 	file.close();
-	if ( !parsingSuccessful )
-	{
+	if(!parsingSuccessful) {
 		// report to the user the failure and their locations in the document.
 		System::Console::WriteLine("Failed to parse configuration\n");
 		System::Console::WriteLine(gcnew System::String(reader.getFormatedErrorMessages().c_str()));
@@ -28,7 +27,6 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 
 	Json::Value sceneJSON = root.get("scene", NULL);
 	Scene * scene = sceneRenderer->getScene();
-	objectManager->addObject("scene", scene);
 	Json::Value bgColorJSON = sceneJSON.get("backgroundColor", NULL);
 	if(bgColorJSON != NULL) {
 		scene->setBackgroundColor(jsonToColor(bgColorJSON));
@@ -61,7 +59,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				light->setDiffuseCoef(diffuseCoefJSON.asDouble());
 			}
 			scene->addLightSource(light);
-			objectManager->addObject(lightName, light);
+			objectManager->addLightSource(lightName, light);
 		}
 	}
 
@@ -92,7 +90,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 										jsonToP3(object3DJSON["C"]));
 			}
 			scene->addObject3D(object3D);
-			objectManager->addObject(objectName, object3D);
+			objectManager->addObject3D(objectName, object3D);
 		}
 	}
 
@@ -125,7 +123,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 			for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
 				scene->addObject3D(*it);
 			}
-			objectManager->addObject(objectName, polyhedron);
+			objectManager->addObject3D(objectName, polyhedron);
 		}
 	}
 
@@ -136,19 +134,20 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 			std::string textureName = *it;
 			Json::Value textureJSON = texturesJSON[textureName];
 			Texture * texture = new Texture(textureJSON["FileName"].asString().c_str());
-			objectManager->addObject(textureName, texture);
+			objectManager->addTexture(textureName, texture);
 		}
 	}
 
 	Json::Value sceneRendererJSON = root.get("sceneRenderer", NULL);
 	if(sceneRendererJSON == NULL) 
 		throw std::runtime_error("sceneRenderer not defined in "+fileName);
-	Json::Value cameraScreenJSON = sceneRendererJSON["cameraScreen"];
-	Camera * camera = new Camera(jsonToP3(cameraScreenJSON["position"]),
-								 jsonToP3(cameraScreenJSON["direction"]),
-								 cameraScreenJSON.get("rotation", 0).asDouble());
+	Json::Value cameraJSON = sceneRendererJSON["camera"];
+	Camera * camera = new Camera(jsonToP3(cameraJSON["position"]),
+								 jsonToP3(cameraJSON["direction"]),
+								 cameraJSON.get("rotation", 0).asDouble());
 	sceneRenderer->setCamera(camera);
-	sceneRenderer->setCameraScreenDist(cameraScreenJSON.get("screenDist", 200).asDouble());
+	sceneRenderer->setCameraScreenDist(sceneRendererJSON.get("cameraScreenDist", 200).asDouble());
+	objectManager->addCamera("camera1", camera);
 
 	std::string methodType = sceneRendererJSON["method"].get("type", "OrthographicProjection").asString();
 	RenderingMethod * renderingMethod;
@@ -169,13 +168,12 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 			Json::Value modelTypeJSON = modelJSON.get("type", NULL);
 			if(modelTypeJSON != NULL) {
 				std::string modelTypeStr = modelTypeJSON.asString();
-				void * obj = objectManager->getObject(objectName);
-				if(obj == NULL) continue;
+				Object3D * object3D = objectManager->getObject3D(objectName);
+				if(object3D == NULL) continue;
 				Model * model;
 				if( modelTypeStr == "SphereModel" 
 				 || modelTypeStr == "PlaneModel"
 				 || modelTypeStr == "TriangleModel") {
-					Object3D * object3D = static_cast<Object3D*>(obj);
 					if(modelTypeStr == "SphereModel") {
 						model = new SphereModel();
 					} else {
@@ -185,7 +183,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				} else if(modelTypeStr == "PolyhedronModel"
 					   || modelTypeStr == "ParallelepipedModel"
 					   || modelTypeStr == "MayaModel") {
-					Polyhedron * polyhedron = static_cast<Polyhedron*>(obj);
+					Polyhedron * polyhedron = static_cast<Polyhedron*>(object3D);
 					if(modelTypeStr == "PolyhedronModel") {
 						model = new PolyhedronModel(polyhedron);
 					} else {
@@ -198,7 +196,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				}
 				Json::Value textureJSON = modelJSON.get("texture", NULL);
 				if(textureJSON != NULL) {
-					model->setTexture((Texture*)objectManager->getObject(textureJSON.asString()));
+					model->setTexture(objectManager->getTexture(textureJSON.asString()));
 				}
 				Json::Value colorJSON = modelJSON.get("color", NULL);
 				if(colorJSON != NULL) {
@@ -206,7 +204,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				}
 				Json::Value bumpJSON = modelJSON.get("bump", NULL);
 				if(bumpJSON != NULL) {
-					model->setBump((Texture*)objectManager->getObject(bumpJSON.asString()));
+					model->setBump(objectManager->getTexture(bumpJSON.asString()));
 				}
 				Json::Value materialJSON = modelJSON.get("material", NULL);
 				if(materialJSON != NULL) {
@@ -216,7 +214,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				if(textureScaleJSON != NULL) {
 					model->setTextureScale(textureScaleJSON.asDouble());
 				}
-				objectManager->addObject(objectName+"Model", model);
+				objectManager->add(objectName+"Model", model);
 			}
 		}
 	}

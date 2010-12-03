@@ -40,16 +40,10 @@ std::vector<Object3D *> & Scene::getObjects3D() {
 }
 
 void Scene::removeAllObjects3D() {
-	for(std::vector<Object3D *>::iterator it = objects.begin(); it != objects.end(); it++) {
-		delete (*it);
-	}
 	objects.clear();
 }
 
 void Scene::removeAllLightSources() {
-	for(std::vector<LightSource *>::iterator it = lights.begin(); it != lights.end(); it++) {
-		delete (*it);
-	}
 	lights.clear();
 }
 

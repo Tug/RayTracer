@@ -5,6 +5,9 @@
 SceneRenderer::SceneRenderer(Screen * screen) {
 	this->scene = new Scene();
 	this->screen = screen;
+	this->renderingMethod = NULL;
+	this->camera = NULL;
+	this->cameraScreen = NULL;
 }
 
 SceneRenderer::SceneRenderer(SceneRenderer * sceneRenderer) {
@@ -17,11 +20,16 @@ SceneRenderer::SceneRenderer(SceneRenderer * sceneRenderer) {
 }
 
 SceneRenderer::~SceneRenderer() {
+	deleteObject3DRenderers();
+	delete cameraScreen;
+	delete scene;
+}
+
+void SceneRenderer::deleteObject3DRenderers() {
 	for(std::map<Object3D*, Object3DRenderer*>::iterator it = renderersMap.begin(); it != renderersMap.end(); it++) {
 		delete (*it).second;
 	}
-	delete cameraScreen;
-	delete scene;
+	renderersMap.clear();
 }
 
 void SceneRenderer::initObject3DRenderers() {
@@ -35,9 +43,7 @@ void SceneRenderer::initObject3DRenderers() {
 
 void SceneRenderer::render(Zone & rendereringZone) {
 	cameraScreen->getScreen()->fillBackground(scene->getBackgroundColor());
-	System::Console::WriteLine("Start rendering...");
 	renderingMethod->drawScene(this, rendereringZone);
-	System::Console::WriteLine("Rendering finished!");
 }
 
 void SceneRenderer::render() {
@@ -63,6 +69,14 @@ Object3DRenderer * SceneRenderer::getObject3DRenderer(Object3D* object3D) {
 }
 
 
+void SceneRenderer::reset() {
+	scene->removeAll();
+	if(this->renderingMethod != NULL)
+		delete this->renderingMethod;
+	if(this->cameraScreen != NULL)
+		delete this->cameraScreen;
+}
+
 Scene * SceneRenderer::getScene() { return scene; }
 double SceneRenderer::getCameraScreenDist() { return cameraScreenDist; }
 RenderingMethod * SceneRenderer::getRenderingMethod() { return renderingMethod; }
@@ -77,14 +91,10 @@ void SceneRenderer::setScene(Scene * scene) {
 
 void SceneRenderer::setCameraScreenDist(double dist) {
 	this->cameraScreenDist = dist;
-	if(this->cameraScreen != NULL)
-		delete this->cameraScreen;
 	this->cameraScreen = new CameraScreen(camera, screen, dist);
 }
 
 void SceneRenderer::setRenderingMethod(RenderingMethod * renderingMethod) {
-	if(this->renderingMethod != NULL)
-		delete this->renderingMethod;
 	this->renderingMethod = renderingMethod;
 }
 

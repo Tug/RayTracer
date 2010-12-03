@@ -12,14 +12,12 @@
 			  ,"earthBump": {"FileName": "textures//earth_bump.jpg"}
   },
   "sceneRenderer" : {
-    "scene": "scene"
-    ,"cameraScreen": {
-		  "camera": "camera", "screen": "screen"
-		  ,"position": {"x":350, "y":0, "z":200}
+    "camera": {
+		  "position": {"x":350, "y":0, "z":200}
 		  ,"direction": {"x":0, "y":1, "z":0}
 		  ,"rotation": 0
-		  ,"screenDist": 150
-    }
+		}
+    ,"cameraScreenDist": 150
     ,"method": {"type": "RayTracing"}
     ,"models": {
 		  "sphere1": {

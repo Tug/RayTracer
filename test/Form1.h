@@ -43,7 +43,6 @@ namespace test {
 			SetStyle(ControlStyles::AllPaintingInWmPaint | ControlStyles::UserPaint | ControlStyles::DoubleBuffer, true);
 
 			String^ dir = System::IO::Directory::GetCurrentDirectory();
-			//System::Console::WriteLine("dir : "+dir);
 			this->configDir = dir+"/config";
 			array<String^>^ configFiles = Directory::GetFiles(configDir, "*.txt");
 			for each(String^ %filePath in configFiles)
@@ -51,6 +50,8 @@ namespace test {
 				filePath = (gcnew FileInfo(filePath))->Name;
 			}
 			this->comboBox2->Items->AddRange(configFiles);
+			this->comboBox2->SelectedIndex = 0;
+			this->comboBox1->SelectedIndex = 0;
 
 			picImage->MouseDown += gcnew MouseEventHandler(this, &Form1::pictureBox_MouseDown);
 			picImage->MouseUp += gcnew MouseEventHandler(this, &Form1::pictureBox_MouseUp);
@@ -115,8 +116,10 @@ namespace test {
 
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
-	private: System::Windows::Forms::CheckedListBox^  checkedListBox1;
-	private: System::Windows::Forms::CheckedListBox^  checkedListBox2;
+	private: System::Windows::Forms::CheckedListBox^  object3DListBox;
+	private: System::Windows::Forms::CheckedListBox^  lightsListBox;
+
+
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Button^  button2;
@@ -177,8 +180,8 @@ namespace test {
 			this->ccToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
-			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
-			this->checkedListBox2 = (gcnew System::Windows::Forms::CheckedListBox());
+			this->object3DListBox = (gcnew System::Windows::Forms::CheckedListBox());
+			this->lightsListBox = (gcnew System::Windows::Forms::CheckedListBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->button2 = (gcnew System::Windows::Forms::Button());
@@ -304,21 +307,21 @@ namespace test {
 			this->comboBox1->TabIndex = 27;
 			this->comboBox1->SelectedIndexChanged += gcnew System::EventHandler(this, &Form1::comboBox1_SelectedIndexChanged);
 			// 
-			// checkedListBox1
+			// object3DListBox
 			// 
-			this->checkedListBox1->FormattingEnabled = true;
-			this->checkedListBox1->Location = System::Drawing::Point(705, 137);
-			this->checkedListBox1->Name = L"checkedListBox1";
-			this->checkedListBox1->Size = System::Drawing::Size(157, 94);
-			this->checkedListBox1->TabIndex = 28;
+			this->object3DListBox->FormattingEnabled = true;
+			this->object3DListBox->Location = System::Drawing::Point(705, 137);
+			this->object3DListBox->Name = L"object3DListBox";
+			this->object3DListBox->Size = System::Drawing::Size(157, 94);
+			this->object3DListBox->TabIndex = 28;
 			// 
-			// checkedListBox2
+			// lightsListBox
 			// 
-			this->checkedListBox2->FormattingEnabled = true;
-			this->checkedListBox2->Location = System::Drawing::Point(705, 284);
-			this->checkedListBox2->Name = L"checkedListBox2";
-			this->checkedListBox2->Size = System::Drawing::Size(157, 94);
-			this->checkedListBox2->TabIndex = 29;
+			this->lightsListBox->FormattingEnabled = true;
+			this->lightsListBox->Location = System::Drawing::Point(705, 284);
+			this->lightsListBox->Name = L"lightsListBox";
+			this->lightsListBox->Size = System::Drawing::Size(157, 94);
+			this->lightsListBox->TabIndex = 29;
 			// 
 			// label2
 			// 
@@ -553,8 +556,8 @@ namespace test {
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
-			this->Controls->Add(this->checkedListBox2);
-			this->Controls->Add(this->checkedListBox1);
+			this->Controls->Add(this->lightsListBox);
+			this->Controls->Add(this->object3DListBox);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
@@ -643,9 +646,55 @@ namespace test {
 	
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 			 {
-				 System::Threading::Thread ^ t = gcnew System::Threading::Thread(
-					 		gcnew System::Threading::ParameterizedThreadStart(this, &Form1::render));
-				 t->Start(); //t->Start(params for multi thread);
+				button1->Enabled = false;
+				String^ curItem = comboBox2->SelectedItem->ToString();
+				String^ absPath = this->configDir +"/"+ curItem;
+				std::string stdAbsPath;
+				MarshalString(absPath, stdAbsPath);
+				this->sceneRenderer->reset();
+				this->manager->deleteAll();
+				object3DListBox->Items->Clear();
+				lightsListBox->Items->Clear();
+
+				System::Console::WriteLine("Loading configuration file...");
+				try {
+					Config config(stdAbsPath);
+					config.load(this->sceneRenderer, this->manager);
+				} catch(std::exception & ex) {
+					System::Console::WriteLine("Error : "+gcnew String(ex.what()));
+				}
+				System::Console::WriteLine("Configuration loaded!");
+
+				curItem = comboBox1->SelectedItem->ToString();
+				RenderingMethod * method = NULL;
+				if(curItem == "RayTracing") {
+					method = new RayTracing();
+				} else if(curItem == "RayCasting") {
+					method = new RayCasting();
+				} else if(curItem == "OrthographicProjection") {
+					method = new OrthographicProjection();
+				}
+
+				std::vector<std::string> objectsNames = this->manager->getObjects3DNames();
+				for(std::vector<std::string>::iterator it = objectsNames.begin(); it != objectsNames.end(); it++) {
+					object3DListBox->Items->Add(gcnew String((*it).c_str()));
+				}
+				std::vector<std::string> lightsNames = this->manager->getLightSourcesNames();
+				for(std::vector<std::string>::iterator it = lightsNames.begin(); it != lightsNames.end(); it++) {
+					lightsListBox->Items->Add(gcnew String((*it).c_str()));
+				}
+
+				if(method != NULL)
+					sceneRenderer->setRenderingMethod(method);
+
+				System::Console::WriteLine("Start rendering...");
+				sceneRenderer->render();
+				System::Console::WriteLine("Rendering finished!");
+
+				button1->Enabled = true;
+				//System::Threading::Thread ^ t = gcnew System::Threading::Thread(
+				//	 		gcnew System::Threading::ParameterizedThreadStart(this, &Form1::render));
+				//t->Start(); //t->Start(params for multi thread);
 			 }
 
 	private: System::Void checkBox1_CheckedChanged(System::Object^  sender, System::EventArgs^  e) {
@@ -670,33 +719,12 @@ private: System::Void button8_Click(System::Object^  sender, System::EventArgs^ 
 		 }
 private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
 		 }
-public: System::Void render(Object^ data) {
+/*public: System::Void render(Object^ data) {
 			sceneRenderer->render();
-		}
+		}*/
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-			// Get the currently selected item in the ListBox.
-			String^ curItem = comboBox1->SelectedItem->ToString();
-			RenderingMethod * method = NULL;
-			if(curItem == "RayTracing") {
-				method = new RayTracing();
-			} else if(curItem == "RayCasting") {
-				method = new RayCasting();
-			} else if(curItem == "OrthographicProjection") {
-				method = new OrthographicProjection();
-			}
-			if(method != NULL)
-				sceneRenderer->setRenderingMethod(method);
 		 }
 private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-			String^ curItem = comboBox2->SelectedItem->ToString();
-			String^ absPath = this->configDir +"/"+ curItem;
-			std::string stdAbsPath;
-			MarshalString(absPath, stdAbsPath);
-			try {
-				Config(stdAbsPath).load(this->sceneRenderer, this->manager);
-			} catch(std::exception & ex) {
-				System::Console::WriteLine("Error parsing config file : "+gcnew String(ex.what()));
-			}
 		 }
 };
 
