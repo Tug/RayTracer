@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{618439D8-DB84-4273-AFBD-7E3EE20573B5}</ProjectGuid>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <Keyword>ManagedCProj</Keyword>
+    <RootNamespace>test</RootNamespace>
+    <ProjectName>Projet IMA</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CLRSupport>Pure</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CLRSupport>Pure</CLRSupport>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.ico" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="config\bump2spheres.txt" />
+    <None Include="config\cube.txt" />
+    <None Include="config\default.txt" />
+    <None Include="config\plane.txt" />
+    <None Include="config\terre.txt" />
+    <None Include="config\transparence2spheres.txt" />
+    <None Include="config\triangle.txt" />
+    <None Include="jsoncpp\json_internalarray.inl" />
+    <None Include="jsoncpp\json_internalmap.inl" />
+    <None Include="jsoncpp\json_valueiterator.inl" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AmbientLightSource.cpp" />
+    <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraScreen.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="jsoncpp\json_reader.cpp" />
+    <ClCompile Include="jsoncpp\json_value.cpp" />
+    <ClCompile Include="jsoncpp\json_writer.cpp" />
+    <ClCompile Include="Object3DRenderer.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="OrthographicProjection.cpp" />
+    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="PlaneEditor.cpp" />
+    <ClCompile Include="PlaneModel.cpp" />
+    <ClCompile Include="Polyhedron.cpp" />
+    <ClCompile Include="PolyhedronModel.cpp" />
+    <ClCompile Include="Rasterization.cpp" />
+    <ClCompile Include="Ray.cpp" />
+    <ClCompile Include="RayCasting.cpp" />
+    <ClCompile Include="RayTracing.cpp" />
+    <ClCompile Include="SceneRenderer.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="LightSource.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="P3.CPP" />
+    <ClCompile Include="P3S.cpp" />
+    <ClCompile Include="PointLightSource.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Screen.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="SphereEditor.cpp" />
+    <ClCompile Include="SphereModel.cpp" />
+    <ClCompile Include="Parallelepiped.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="WinBufferedScreen.cpp" />
+    <ClCompile Include="winmain.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="WinScreen.cpp" />
+    <ClCompile Include="ZBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AmbientLightSource.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraScreen.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="jsoncpp\json.h" />
+    <ClInclude Include="jsoncpp\json_autolink.h" />
+    <ClInclude Include="jsoncpp\json_batchallocator.h" />
+    <ClInclude Include="jsoncpp\json_config.h" />
+    <ClInclude Include="jsoncpp\json_features.h" />
+    <ClInclude Include="jsoncpp\json_forwards.h" />
+    <ClInclude Include="jsoncpp\json_reader.h" />
+    <ClInclude Include="jsoncpp\json_value.h" />
+    <ClInclude Include="jsoncpp\json_writer.h" />
+    <ClInclude Include="Object3DRenderer.h" />
+    <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="OrthographicProjection.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="PlaneEditor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="PlaneModel.h" />
+    <ClInclude Include="Polyhedron.h" />
+    <ClInclude Include="PolyhedronModel.h" />
+    <ClInclude Include="Rasterization.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="RayCasting.h" />
+    <ClInclude Include="RayTracing.h" />
+    <ClInclude Include="RenderingMethod.h" />
+    <ClInclude Include="SceneRenderer.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="Object3D.h" />
+    <ClInclude Include="Form1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="LightSource.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="P3.H" />
+    <ClInclude Include="P3S.h" />
+    <ClInclude Include="PointLightSource.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Screen.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="SphereEditor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="SphereModel.h" />
+    <ClInclude Include="Parallelepiped.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="WinBufferedScreen.h" />
+    <ClInclude Include="WinScreen.h" />
+    <ClInclude Include="ZBuffer.h" />
+    <ClInclude Include="Zone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resX">
+      <DependentUpon>Form1.h</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlaneEditor.resx">
+      <DependentUpon>PlaneEditor.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SphereEditor.resx">
+      <DependentUpon>SphereEditor.h</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

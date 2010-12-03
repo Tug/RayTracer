@@ -1,0 +1,23 @@
+#ifndef _H_WINSCREEN
+#define _H_WINSCREEN
+
+#include <vcclr.h>
+#include <gcroot.h>
+#include "Screen.h"
+
+
+class WinScreen : public Screen
+{
+public:
+	//WinScreen(gcroot<System::Windows::Forms::PictureBox^> & pictureBox, int width, int height);
+	WinScreen(gcroot<System::Drawing::Graphics^> & g, int width, int height);
+	~WinScreen();
+	void setPixel(int px, int py, Color & c);
+	void repaint();
+	virtual void fillBackground(Color & c);
+
+private:
+	gcroot<System::Drawing::Graphics^> g;
+};
+
+#endif

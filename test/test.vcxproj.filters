@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\light">
+      <UniqueIdentifier>{2a902685-91d6-44dd-937d-6cb66d4d7594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\light">
+      <UniqueIdentifier>{4b20c5ea-3d6c-464f-8437-ccd1a83fc29d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\object3d">
+      <UniqueIdentifier>{689d166b-8657-47ed-8fa1-0ace1b4820ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\util">
+      <UniqueIdentifier>{5d504b6d-16da-4774-b6e9-67dcfb5b6e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\object3d">
+      <UniqueIdentifier>{aa4bc9cc-5823-4b3f-8d88-f20a424f4ff3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\util">
+      <UniqueIdentifier>{2a794b2f-c5ae-4880-bb13-166c6b378c06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\rendering">
+      <UniqueIdentifier>{f7baf11d-b4ce-4971-b923-f3973655f126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\rendering">
+      <UniqueIdentifier>{dcef9574-e014-4eb8-8460-0bca453571ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\windows">
+      <UniqueIdentifier>{6444325a-694b-4da9-a228-6c382cb56ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\windows">
+      <UniqueIdentifier>{2d8fdb87-5078-464f-8da2-ec2a876caddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\rendering\method">
+      <UniqueIdentifier>{4cfea88e-792b-4c01-843a-fd7ffad9ab76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\rendering\method">
+      <UniqueIdentifier>{de7377ab-d560-4123-b7c0-c8693ac45d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\rendering\model">
+      <UniqueIdentifier>{2d209112-4ac9-4846-b69d-246bd5310237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\rendering\model">
+      <UniqueIdentifier>{96cd33c9-d6fd-460b-aca9-41b328b8c2ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\util\externallib">
+      <UniqueIdentifier>{fb163a88-3264-45d3-b849-ca74114d9507}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\util\externallib\json">
+      <UniqueIdentifier>{f2c9e402-cf25-4952-9cb2-be8967b841e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\util\externallib">
+      <UniqueIdentifier>{9485fac0-4561-48bc-8fe3-6dcd6490f717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\util\externallib\json">
+      <UniqueIdentifier>{78bd917a-261c-4c02-a32d-4fb4b7d6be67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\gui">
+      <UniqueIdentifier>{fe03a7e9-a255-49ae-b06c-d1d334346fc4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="app.ico">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="jsoncpp\json_internalarray.inl">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </None>
+    <None Include="jsoncpp\json_internalmap.inl">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </None>
+    <None Include="jsoncpp\json_valueiterator.inl">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </None>
+    <None Include="config\default.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\bump2spheres.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\transparence2spheres.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\terre.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\cube.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\plane.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\triangle.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LightSource.cpp">
+      <Filter>Fichiers sources\light</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLightSource.cpp">
+      <Filter>Fichiers sources\light</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLightSource.cpp">
+      <Filter>Fichiers sources\light</Filter>
+    </ClCompile>
+    <ClCompile Include="P3.CPP">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="ZBuffer.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3D.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="P3S.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WinBufferedScreen.cpp">
+      <Filter>Fichiers sources\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="WinScreen.cpp">
+      <Filter>Fichiers sources\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="winmain.cpp">
+      <Filter>Fichiers sources\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Fichiers sources\rendering\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Fichiers sources\rendering\model</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRenderer.cpp">
+      <Filter>Fichiers sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="OrthographicProjection.cpp">
+      <Filter>Fichiers sources\rendering\method</Filter>
+    </ClCompile>
+    <ClCompile Include="Rasterization.cpp">
+      <Filter>Fichiers sources\rendering\method</Filter>
+    </ClCompile>
+    <ClCompile Include="RayCasting.cpp">
+      <Filter>Fichiers sources\rendering\method</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTracing.cpp">
+      <Filter>Fichiers sources\rendering\method</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraScreen.cpp">
+      <Filter>Fichiers sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Screen.cpp">
+      <Filter>Fichiers sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\json_reader.cpp">
+      <Filter>Fichiers sources\util\externallib\json</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\json_writer.cpp">
+      <Filter>Fichiers sources\util\externallib\json</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\json_value.cpp">
+      <Filter>Fichiers sources\util\externallib\json</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneModel.cpp">
+      <Filter>Fichiers sources\rendering\model</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereModel.cpp">
+      <Filter>Fichiers sources\rendering\model</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3DRenderer.cpp">
+      <Filter>Fichiers sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Polyhedron.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Parallelepiped.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyhedronModel.cpp">
+      <Filter>Fichiers sources\rendering\model</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereEditor.cpp">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneEditor.cpp">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Form1.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Fichiers d%27en-tête\light</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLightSource.h">
+      <Filter>Fichiers d%27en-tête\light</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLightSource.h">
+      <Filter>Fichiers d%27en-tête\light</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="P3.H">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="ZBuffer.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Zone.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3D.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="P3S.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="WinBufferedScreen.h">
+      <Filter>Fichiers d%27en-tête\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="WinScreen.h">
+      <Filter>Fichiers d%27en-tête\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraScreen.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Fichiers d%27en-tête\rendering\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Fichiers d%27en-tête\rendering\model</Filter>
+    </ClInclude>
+    <ClInclude Include="OrthographicProjection.h">
+      <Filter>Fichiers d%27en-tête\rendering\method</Filter>
+    </ClInclude>
+    <ClInclude Include="Rasterization.h">
+      <Filter>Fichiers d%27en-tête\rendering\method</Filter>
+    </ClInclude>
+    <ClInclude Include="RayCasting.h">
+      <Filter>Fichiers d%27en-tête\rendering\method</Filter>
+    </ClInclude>
+    <ClInclude Include="RayTracing.h">
+      <Filter>Fichiers d%27en-tête\rendering\method</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderingMethod.h">
+      <Filter>Fichiers d%27en-tête\rendering\method</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRenderer.h">
+      <Filter>Fichiers d%27en-tête\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Fichiers d%27en-tête\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_writer.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_autolink.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_batchallocator.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_config.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_features.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_forwards.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_reader.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json_value.h">
+      <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereModel.h">
+      <Filter>Fichiers d%27en-tête\rendering\model</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneModel.h">
+      <Filter>Fichiers d%27en-tête\rendering\model</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3DRenderer.h">
+      <Filter>Fichiers d%27en-tête\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Polyhedron.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Parallelepiped.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyhedronModel.h">
+      <Filter>Fichiers d%27en-tête\rendering\model</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereEditor.h">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneEditor.h">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resX">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
