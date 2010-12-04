@@ -16,7 +16,7 @@ class Texture
 		Color GetColor(int x,int y) const;
 
     public:
-		Texture(const char * FileName);
+		Texture(std::string fileName);
 		void load();
 		~Texture();
 				
@@ -29,7 +29,8 @@ class Texture
 		void	Bump (double u,double v,double &dhdu,double &dhdv) const;  // pour le bump map
 
 	private:
-		const char * fileName;
+		std::string fileName;
+		bool loaded;
 };
 
 #endif

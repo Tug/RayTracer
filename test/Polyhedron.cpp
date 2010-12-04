@@ -2,14 +2,14 @@
 
 #include "Polyhedron.h"
 
-Polyhedron::Polyhedron() : Object3D() {
+Polyhedron::Polyhedron() {
 }
 
-Polyhedron::Polyhedron(Polyhedron * polyhedron) : Object3D() {
+Polyhedron::Polyhedron(Polyhedron * polyhedron) {
 	this->triangles = std::vector<Triangle *>(polyhedron->triangles);
 }
 
-Polyhedron::Polyhedron(std::vector<Triangle *> & triangles) : Object3D() {
+Polyhedron::Polyhedron(std::vector<Triangle *> & triangles) {
 	this->triangles = triangles;
 }
 

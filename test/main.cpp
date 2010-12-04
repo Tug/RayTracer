@@ -19,7 +19,7 @@
 
 void myProject(Screen * screen)
 {
-	ObjectManager * manager = new ObjectManager();
+	Manager * manager = new Manager();
 	Config config("config/default.txt");
 	System::Console::WriteLine("Loading config...");
 	SceneRenderer * sceneRenderer = new SceneRenderer(screen);

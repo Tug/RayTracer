@@ -9,18 +9,27 @@
 #include "Texture.h"
 #include "Model.h"
 
-class Manager : public ObjectManager<void*>
+class Manager
 {
 public:
-	Manager() {
-		add("Object3D", new ObjectManager<Object3D*>());
-		add("Polyhedron", new ObjectManager<Polyhedron*>());
-		add("LightSource", new ObjectManager<LightSource*>());
-		add("Camera", new ObjectManager<Camera*>());
-		add("Texture", new ObjectManager<Texture*>());
-		add("Model", new ObjectManager<Model*>());
-	}
+	Manager();
+	~Manager();
+	void deleteAll();
 
+	ObjectManager<Object3D*> * getObjects3D();
+	ObjectManager<Polyhedron*> * getPolyhedra();
+	ObjectManager<LightSource*> * getLightSources();
+	ObjectManager<Camera*> * getCameras();
+	ObjectManager<Texture*> * getTextures();
+	ObjectManager<Model*> * getModels();
+
+private:
+	ObjectManager<Object3D*> * objects3D;
+	ObjectManager<Polyhedron*> * polyhedra;
+	ObjectManager<LightSource*> * lights;
+	ObjectManager<Camera*> * cameras;
+	ObjectManager<Texture*> * textures;
+	ObjectManager<Model*> * models;
 };
 
 #endif

@@ -53,6 +53,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(SolutionDir)jsoncpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAsManaged>Pure</CompileAsManaged>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -113,8 +114,8 @@
     <ClCompile Include="jsoncpp\json_reader.cpp" />
     <ClCompile Include="jsoncpp\json_value.cpp" />
     <ClCompile Include="jsoncpp\json_writer.cpp" />
+    <ClCompile Include="Manager.cpp" />
     <ClCompile Include="Object3DRenderer.cpp" />
-    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="OrthographicProjection.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneEditor.cpp" />

@@ -42,6 +42,15 @@ namespace test {
 			InitializeComponent();
 			SetStyle(ControlStyles::AllPaintingInWmPaint | ControlStyles::UserPaint | ControlStyles::DoubleBuffer, true);
 
+			picImage->MouseDown += gcnew MouseEventHandler(this, &Form1::pictureBox_MouseDown);
+			picImage->MouseUp += gcnew MouseEventHandler(this, &Form1::pictureBox_MouseUp);
+			int WIDTH = picImage->Width - 4;
+			int HEIGHT = picImage->Height - 4;
+			System::Drawing::Graphics^ g = picImage->CreateGraphics();
+			WinScreen * screen = new WinScreen(gcroot<System::Drawing::Graphics^>(g), WIDTH, HEIGHT);
+			this->sceneRenderer = new SceneRenderer(screen);
+			this->manager = new Manager();
+
 			String^ dir = System::IO::Directory::GetCurrentDirectory();
 			this->configDir = dir+"/config";
 			array<String^>^ configFiles = Directory::GetFiles(configDir, "*.txt");
@@ -52,15 +61,6 @@ namespace test {
 			this->comboBox2->Items->AddRange(configFiles);
 			this->comboBox2->SelectedIndex = 0;
 			this->comboBox1->SelectedIndex = 0;
-
-			picImage->MouseDown += gcnew MouseEventHandler(this, &Form1::pictureBox_MouseDown);
-			picImage->MouseUp += gcnew MouseEventHandler(this, &Form1::pictureBox_MouseUp);
-			int WIDTH = picImage->Width - 4;
-			int HEIGHT = picImage->Height - 4;
-			System::Drawing::Graphics^ g = picImage->CreateGraphics();
-			WinScreen * screen = new WinScreen(gcroot<System::Drawing::Graphics^>(g), WIDTH, HEIGHT);
-			this->sceneRenderer = new SceneRenderer(screen);
-			this->manager = new Manager();
 		}
 
 	protected:
@@ -636,55 +636,14 @@ namespace test {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e)
 			 {
 				button1->Enabled = false;
-				String^ curItem = comboBox2->SelectedItem->ToString();
-				String^ absPath = this->configDir +"/"+ curItem;
-				std::string stdAbsPath;
-				MarshalString(absPath, stdAbsPath);
-				this->sceneRenderer->reset();
-				this->manager->deleteAll();
-				object3DListBox->Items->Clear();
-				lightsListBox->Items->Clear();
 
-				System::Console::WriteLine("Loading configuration file...");
-				try {
-					Config config(stdAbsPath);
-					config.load(this->manager);
-				} catch(std::exception & ex) {
-					System::Console::WriteLine("Error : "+gcnew String(ex.what()));
+				// load textures
+				System::Console::WriteLine("Loading textures...");
+				std::vector<std::string> textureNames = this->manager->getTextures()->getNames();
+				for(std::vector<std::string>::iterator it = textureNames.begin(); it != textureNames.end(); it++) {
+					this->manager->getTextures()->get(*it)->load();
 				}
-
-				loadSceneRenderer();
-				std::vector<std::string> objectsNames = this->manager->getObjects3DNames();
-			for(std::vector<std::string>::iterator it = objectsNames.begin(); it != objectsNames.end(); it++) {
-				object3DListBox->Items->Add(gcnew String((*it).c_str()));
-			}
-			std::vector<std::string> lightsNames = this->manager->getLightSourcesNames();
-			for(std::vector<std::string>::iterator it = lightsNames.begin(); it != lightsNames.end(); it++) {
-				lightsListBox->Items->Add(gcnew String((*it).c_str()));
-			}
-				System::Console::WriteLine("Configuration loaded!");
-
-				curItem = comboBox1->SelectedItem->ToString();
-				RenderingMethod * method = NULL;
-				if(curItem == "RayTracing") {
-					method = new RayTracing();
-				} else if(curItem == "RayCasting") {
-					method = new RayCasting();
-				} else if(curItem == "OrthographicProjection") {
-					method = new OrthographicProjection();
-				}
-
-				std::vector<std::string> objectsNames = this->manager->getObjects3DNames();
-				for(std::vector<std::string>::iterator it = objectsNames.begin(); it != objectsNames.end(); it++) {
-					object3DListBox->Items->Add(gcnew String((*it).c_str()));
-				}
-				std::vector<std::string> lightsNames = this->manager->getLightSourcesNames();
-				for(std::vector<std::string>::iterator it = lightsNames.begin(); it != lightsNames.end(); it++) {
-					lightsListBox->Items->Add(gcnew String((*it).c_str()));
-				}
-
-				if(method != NULL)
-					sceneRenderer->setRenderingMethod(method);
+				System::Console::WriteLine("Textures loaded!");
 
 				System::Console::WriteLine("Start rendering...");
 				sceneRenderer->render();
@@ -722,12 +681,55 @@ private: System::Void button12_Click(System::Object^  sender, System::EventArgs^
 			sceneRenderer->render();
 		}*/
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+			String^ curItem = comboBox1->SelectedItem->ToString();
+			RenderingMethod * method = NULL;
+			if(curItem == "RayTracing") {
+				method = new RayTracing();
+			} else if(curItem == "RayCasting") {
+				method = new RayCasting();
+			} else if(curItem == "OrthographicProjection") {
+				method = new OrthographicProjection();
+			}
+
+			if(method != NULL)
+				sceneRenderer->setRenderingMethod(method);
 		 }
 private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-		 }
-private: System::Void loadSceneRenderer() {
-			
-			
+			String^ curItem = comboBox2->SelectedItem->ToString();
+			String^ absPath = this->configDir +"/"+ curItem;
+			std::string stdAbsPath;
+			MarshalString(absPath, stdAbsPath);
+
+			System::Console::WriteLine("Loading configuration file : "+curItem);
+
+			this->sceneRenderer->reset();
+			this->manager->deleteAll();
+			object3DListBox->Items->Clear();
+			lightsListBox->Items->Clear();
+
+			try {
+				Config config(stdAbsPath);
+				config.load(this->sceneRenderer, this->manager);
+			} catch(std::exception & ex) {
+				System::Console::WriteLine("Error : "+gcnew String(ex.what()));
+			}
+
+			std::vector<std::string> objectsNames = this->manager->getObjects3D()->getNames();
+			for(std::vector<std::string>::iterator it = objectsNames.begin(); it != objectsNames.end(); it++) {
+				object3DListBox->Items->Add(gcnew String((*it).c_str()), CheckState::Checked );
+			}
+
+			std::vector<std::string> polyhedronNames = this->manager->getPolyhedra()->getNames();
+			for(std::vector<std::string>::iterator it = polyhedronNames.begin(); it != polyhedronNames.end(); it++) {
+				object3DListBox->Items->Add(gcnew String((*it).c_str()), CheckState::Checked );
+			}
+
+			std::vector<std::string> lightsNames = this->manager->getLightSources()->getNames();
+			for(std::vector<std::string>::iterator it = lightsNames.begin(); it != lightsNames.end(); it++) {
+				lightsListBox->Items->Add(gcnew String((*it).c_str()), CheckState::Checked );
+			}
+
+			System::Console::WriteLine("Configuration loaded!");
 		 }
 };
 

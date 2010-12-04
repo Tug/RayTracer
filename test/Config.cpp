@@ -59,7 +59,7 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 				light->setDiffuseCoef(diffuseCoefJSON.asDouble());
 			}
 			scene->addLightSource(light);
-			manager->get("LightSource")->add(lightName, light);
+			manager->getLightSources()->add(lightName, light);
 		}
 	}
 
@@ -90,7 +90,7 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 										jsonToP3(object3DJSON["C"]));
 			}
 			scene->addObject3D(object3D);
-			manager->get("Object3D")->add(objectName, object3D);
+			manager->getObjects3D()->add(objectName, object3D);
 		}
 	}
 
@@ -119,11 +119,11 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 				parseObjFile(filename, &triangles, centerObj, scale);
 				polyhedron = new Polyhedron(triangles);
 			} else continue;
-			/*std::vector<Triangle*> triangles = polyhedron->getTriangles();
+			std::vector<Triangle*> triangles = polyhedron->getTriangles();
 			for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
 				scene->addObject3D(*it);
-			}*/
-			manager->get("Polyhedron")->add(objectName, polyhedron);
+			}
+			manager->getPolyhedra()->add(objectName, polyhedron);
 		}
 	}
 
@@ -133,8 +133,8 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 		for(std::vector<std::string>::iterator it = texturesName.begin(); it != texturesName.end(); it++) {
 			std::string textureName = *it;
 			Json::Value textureJSON = texturesJSON[textureName];
-			Texture * texture = new Texture(textureJSON["FileName"].asString().c_str());
-			manager->get("Texture")->add(textureName, texture);
+			Texture * texture = new Texture(textureJSON["FileName"].asString());
+			manager->getTextures()->add(textureName, texture);
 		}
 	}
 
@@ -147,7 +147,7 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 								 cameraJSON.get("rotation", 0).asDouble());
 	sceneRenderer->setCamera(camera);
 	sceneRenderer->setCameraScreenDist(sceneRendererJSON.get("cameraScreenDist", 200).asDouble());
-	manager->get("Camera")->add("camera1", camera);
+	manager->getCameras()->add("camera1", camera);
 
 	std::string methodType = sceneRendererJSON["method"].get("type", "OrthographicProjection").asString();
 	RenderingMethod * renderingMethod = NULL;
@@ -180,7 +180,7 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 				}
 				Json::Value textureJSON = modelJSON.get("texture", NULL);
 				if(textureJSON != NULL) {
-					model->setTexture(manager->get("Texture")->add(textureJSON.asString()));
+					model->setTexture(manager->getTextures()->get(textureJSON.asString()));
 				}
 				Json::Value colorJSON = modelJSON.get("color", NULL);
 				if(colorJSON != NULL) {
@@ -188,7 +188,7 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 				}
 				Json::Value bumpJSON = modelJSON.get("bump", NULL);
 				if(bumpJSON != NULL) {
-					model->setBump(manager->get("Texture")->get(bumpJSON.asString()));
+					model->setBump(manager->getTextures()->get(bumpJSON.asString()));
 				}
 				Json::Value materialJSON = modelJSON.get("material", NULL);
 				if(materialJSON != NULL) {
@@ -198,14 +198,21 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 				if(textureScaleJSON != NULL) {
 					model->setTextureScale(textureScaleJSON.asDouble());
 				}
-				manager->get("Model")->add(objectName, model);
+				manager->getModels()->add(modelName, model);
 				Json::Value modelObjectsJSON = modelJSON.get("objects", NULL);
 				if(modelObjectsJSON != NULL) {
-					for(int i=0; i < modelObjectsJSON.size(); i++) {
+					for(unsigned int i=0; i < modelObjectsJSON.size(); i++) {
 						std::string objectName = modelObjectsJSON[i].asString();
-						Object3D * object3D = manager->get("Object3D")->get(objectName);
-						if(object3D == NULL) continue;
-						sceneRenderer->getObject3DRenderer(object3D)->setModel(model);
+						Object3D * object3D = manager->getObjects3D()->get(objectName);
+						Polyhedron * polyhedron = manager->getPolyhedra()->get(objectName);
+						if(object3D != NULL) {
+							sceneRenderer->getObject3DRenderer(object3D)->setModel(model);
+						} else if(polyhedron != NULL) {
+							std::vector<Triangle*> triangles = polyhedron->getTriangles();
+							for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
+								sceneRenderer->getObject3DRenderer(*it)->setModel(model);
+							}
+						} else continue;
 					}
 				}
 			}

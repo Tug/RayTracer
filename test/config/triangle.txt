@@ -1,17 +1,20 @@
 {
-  "method": {"type": "RayTracing"}
-  ,"backgroundColor": {"m_R": 0, "m_G": 0, "m_B": 0}
-  ,"lights": {
+  "scene": {
+    "backgroundColor": {"m_R": 0, "m_G": 0, "m_B": 0}
+    ,"lights": {
       "alight": {"type":"AmbientLightSource", "color": {"m_R": 1, "m_G": 1, "m_B": 1}, "diffuseCoef": 0.5}
       ,"plight1": {"type":"PointLightSource", "color": {"m_R": 1, "m_G": 1, "m_B": 1}, "position": {"x":600, "y":0, "z":200},"diffuseCoef": 0.6,"specularCoef": 0.6,"specularExponent": 50}
       ,"plight2": {"type":"PointLightSource", "color": {"m_R": 1, "m_G": 1, "m_B": 1}, "position": {"x":0, "y":720, "z":200}}
-  }
-  ,"objects": { 
-       "sphere1": {"type": "Sphere", "center": {"x":250, "y":300, "z":200}, "radius": 100}
-       ,"sphere2": {"type": "Sphere", "center": {"x":470, "y":300, "z":200}, "radius": 100}
-       ,"sphere3": {"type": "Sphere", "center": {"x":200, "y":730, "z":220}, "radius": 50}
-       ,"triangle1": {"type": "Triangle", "A": {"x":400, "y":200, "z":200}, "B": {"x":550, "y":200, "z":200}, "C": {"x":400, "y":300, "z":0}}
-       ,"cube1": {"type": "Parallelepiped", "A": {"x":400, "y":500, "z":100}, "B": {"x":430, "y":500, "z":100}, "C": {"x":400, "y":530, "z":100}}
+    }
+    ,"objects": { 
+      "sphere1": {"type": "Sphere", "center": {"x":250, "y":300, "z":200}, "radius": 100}
+      ,"sphere2": {"type": "Sphere", "center": {"x":470, "y":300, "z":200}, "radius": 100}
+      ,"sphere3": {"type": "Sphere", "center": {"x":200, "y":730, "z":220}, "radius": 50}
+      ,"triangle1": {"type": "Triangle", "A": {"x":400, "y":200, "z":200}, "B": {"x":550, "y":200, "z":200}, "C": {"x":400, "y":300, "z":0}}
+    }
+    ,"polyhedra" : {
+      "cube1": {"type": "Parallelepiped", "A": {"x":400, "y":500, "z":100}, "B": {"x":430, "y":500, "z":100}, "C": {"x":400, "y":530, "z":100}}
+    }
   }
   ,"textures": {
 		 "goldTex":  {"FileName": "textures//gold.jpg"}
@@ -20,43 +23,44 @@
 		,"leadBump": {"FileName": "textures//lead_Bump.jpg"}
 		,"brickTex": {"FileName": "textures//brick01.jpg"}
   }
-  ,"cameras" : {
-    "camera1": {
+  ,"sceneRenderer" : {
+    "camera": {
 		  "position": {"x":350, "y":0, "z":200}
 		  ,"direction": {"x":0, "y":1, "z":0}
 		  ,"rotation": 0
-      ,"screenDist": 190
 		}
-  }
-  ,"models": {
-    "spheremodel1": {
-      "type": "SphereModel"
-      ,"objects": [ "sphere1" ]
-      ,"texture": "goldTex"
-      ,"bump": "goldBump"
-      ,"material": { "reflectivity": 0.5, "transmittance": 0.0, "refractiveIndex": 1.5 }
-    }
-    ,"spheremodel2": {
-      "type": "SphereModel"
-      ,"objects": [ "sphere2" ]
-      ,"texture": "leadTex"
-      ,"bump": "leadBump"
-     }
-    ,"spheremodel3": {
-      "type": "SphereModel"
-      ,"objects": [ "sphere3" ]
-      ,"color": "RED"
-     }
-    //,"cubemodel1": {
-      //"type": "ParallelepipedModel"
-      //,"objects": [ "cube1" ]
-      //,"texture": "brickTex"
-    //}
-    ,"trianglemodel1": {
-      "type": "PlaneModel"
-      ,"objects": [ "triangle1" ]
-      ,"texture": "brickTex"
-      ,"color": "WHITE"
+    ,"cameraScreenDist": 190
+    ,"method": {"type": "RayTracing"}
+    ,"models": {
+      "spheremodel1": {
+        "type": "SphereModel"
+        ,"objects": [ "sphere1" ]
+        ,"texture": "goldTex"
+        ,"bump": "goldBump"
+        ,"material": { "reflectivity": 0.5, "transmittance": 0.0, "refractiveIndex": 1.5 }
+      }
+      ,"spheremodel2": {
+        "type": "SphereModel"
+        ,"objects": [ "sphere2" ]
+        ,"texture": "leadTex"
+        ,"bump": "leadBump"
+      }
+      ,"spheremodel3": {
+        "type": "SphereModel"
+        ,"objects": [ "sphere3" ]
+        ,"color": "RED"
+      }
+      //,"cubemodel1": {
+        //"type": "ParallelepipedModel"
+        //,"objects": [ "cube1" ]
+        //,"texture": "brickTex"
+      //}
+      ,"trianglemodel1": {
+        "type": "PlaneModel"
+        ,"objects": [ "triangle1" ]
+        ,"texture": "brickTex"
+        ,"color": "WHITE"
+      }
     }
   }
 }
