@@ -5,7 +5,7 @@
 #include <string>
 #include <map>
 
-template < typename T > class ObjectManager
+template<class T> class ObjectManager
 {
 public:
 	ObjectManager();

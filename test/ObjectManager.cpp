@@ -2,18 +2,22 @@
 
 #include "ObjectManager.h"
 
-ObjectManager::ObjectManager() {
+template<class T>
+ObjectManager<T>::ObjectManager() {
 }
 
-ObjectManager::~ObjectManager() {
+template<class T>
+ObjectManager<T>::~ObjectManager() {
 	deleteAll();
 }
 
-void ObjectManager::deleteAll() {
+template<class T> 
+void ObjectManager<T>::deleteAll() {
 	objects.clear();
 }
 
-std::vector<std::string> ObjectManager::getNames() {
+template<class T>
+std::vector<std::string> ObjectManager<T>::getNames() {
 	std::vector<std::string> keys;
 	for(std::map<std::string, T >::iterator it = objects.begin(); it != objects.end(); it++) {
 	  keys.push_back(it->first);
@@ -21,19 +25,22 @@ std::vector<std::string> ObjectManager::getNames() {
 	return keys;
 }
 
-void ObjectManager::add(std::string name, T obj) {
+template<class T> 
+void ObjectManager<T>::add(std::string name, T obj) {
 	if(objects.find(objectName) != objects.end())
 		delete objects[objectName];
 	objects[objectName] = obj;
 }
 
-T ObjectManager::get(std::string name) {
+template<class T>
+T ObjectManager<T>::get(std::string name) {
 	if(objects.find(name) == objects.end())
 		return NULL;
 	else return objects[name];
 }
 
-void ObjectManager::Delete(std::string name) { 
+template<class T> 
+void ObjectManager<T>::Delete(std::string name) { 
 	objects.erase(name);
 }
 
