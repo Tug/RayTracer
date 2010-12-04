@@ -26,7 +26,7 @@ public:
 	~SceneRenderer();
 	void render();
 	void render(Zone & renderingZone);
-	void moveCamera(int x, int y);
+	void moveCamera(double dx, double dy, double dz, double du, double dv);
 	Object3DRenderer * getObject3DRenderer(Object3D* object3D);
 	void initObject3DRenderers();
 	void deleteObject3DRenderers();

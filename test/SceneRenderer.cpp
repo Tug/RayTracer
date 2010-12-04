@@ -55,9 +55,11 @@ void SceneRenderer::render() {
 	render(zone);
 }
 
-void SceneRenderer::moveCamera(int x, int y) {
-	P3 deltaPos(x, 0, y);
-	cameraScreen->move(deltaPos);
+void SceneRenderer::moveCamera(double dx, double dy, double dz, double du, double dv) {
+	if(dx != 0 || dy != 0 || dz != 0)
+		cameraScreen->move(P3(dx,dy,dz));
+	if(du != 0 || dv != 0)
+		cameraScreen->rotate(P3S(du,dv,1));
 }
 
 Object3DRenderer * SceneRenderer::getObject3DRenderer(Object3D* object3D) {

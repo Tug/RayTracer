@@ -14,6 +14,7 @@ public:
 	virtual ~Camera();
 	virtual void move(P3 & deltaPos);
 	virtual void rotate(double u, double v);
+	void rotate(P3S & deltaDir);
 	virtual P3 & getPosition();
 	virtual P3 & getDirection();
 	virtual double getRotation();

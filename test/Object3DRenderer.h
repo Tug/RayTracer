@@ -18,6 +18,7 @@ public:
 	Scene * getScene();
 	CameraScreen * getCameraScreen();
 	void setVisible(bool visible);
+	bool isVisible();
 
 protected:
 	Object3D * object3D;

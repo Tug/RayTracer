@@ -116,19 +116,30 @@ namespace test {
 	private: System::Windows::Forms::Button^  button4;
 	private: System::Windows::Forms::Button^  button5;
 	private: System::Windows::Forms::Label^  label4;
-	private: System::Windows::Forms::Button^  button6;
-	private: System::Windows::Forms::Button^  button7;
-	private: System::Windows::Forms::Button^  button8;
-	private: System::Windows::Forms::Button^  button9;
-	private: System::Windows::Forms::Button^  button10;
-	private: System::Windows::Forms::Button^  button11;
-	private: System::Windows::Forms::Button^  button12;
-	private: System::Windows::Forms::Button^  button13;
+	private: System::Windows::Forms::Button^  moveLeftButton;
+
+	private: System::Windows::Forms::Button^  moveRightButton;
+	private: System::Windows::Forms::Button^  lookUpButton;
+	private: System::Windows::Forms::Button^  lookLeftButton;
+
+
+
+	private: System::Windows::Forms::Button^  lookRightButton;
+
+	private: System::Windows::Forms::Button^  lookDownButton;
+	private: System::Windows::Forms::Button^  moveForwardButton;
+	private: System::Windows::Forms::Button^  moveBackwardButton;
+
+
+
 	private: System::Windows::Forms::Label^  x;
 	private: System::Windows::Forms::Label^  label5;
-	private: System::Windows::Forms::TextBox^  textBox1;
-	private: System::Windows::Forms::TextBox^  textBox2;
-	private: System::Windows::Forms::TextBox^  textBox3;
+	private: System::Windows::Forms::TextBox^  camxBox;
+	private: System::Windows::Forms::TextBox^  camyBox;
+private: System::Windows::Forms::TextBox^  camzBox;
+
+
+
 	private: System::Windows::Forms::Label^  label6;
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::ComboBox^  comboBox2;
@@ -178,19 +189,19 @@ namespace test {
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->button6 = (gcnew System::Windows::Forms::Button());
-			this->button7 = (gcnew System::Windows::Forms::Button());
-			this->button8 = (gcnew System::Windows::Forms::Button());
-			this->button9 = (gcnew System::Windows::Forms::Button());
-			this->button10 = (gcnew System::Windows::Forms::Button());
-			this->button11 = (gcnew System::Windows::Forms::Button());
-			this->button12 = (gcnew System::Windows::Forms::Button());
-			this->button13 = (gcnew System::Windows::Forms::Button());
+			this->moveLeftButton = (gcnew System::Windows::Forms::Button());
+			this->moveRightButton = (gcnew System::Windows::Forms::Button());
+			this->lookUpButton = (gcnew System::Windows::Forms::Button());
+			this->lookLeftButton = (gcnew System::Windows::Forms::Button());
+			this->lookRightButton = (gcnew System::Windows::Forms::Button());
+			this->lookDownButton = (gcnew System::Windows::Forms::Button());
+			this->moveForwardButton = (gcnew System::Windows::Forms::Button());
+			this->moveBackwardButton = (gcnew System::Windows::Forms::Button());
 			this->x = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->camxBox = (gcnew System::Windows::Forms::TextBox());
+			this->camyBox = (gcnew System::Windows::Forms::TextBox());
+			this->camzBox = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
@@ -376,79 +387,85 @@ namespace test {
 			this->label4->TabIndex = 36;
 			this->label4->Text = L"Camera";
 			// 
-			// button6
+			// moveLeftButton
 			// 
-			this->button6->Location = System::Drawing::Point(701, 468);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(25, 23);
-			this->button6->TabIndex = 37;
-			this->button6->Text = L"<";
-			this->button6->UseVisualStyleBackColor = true;
+			this->moveLeftButton->Location = System::Drawing::Point(701, 468);
+			this->moveLeftButton->Name = L"moveLeftButton";
+			this->moveLeftButton->Size = System::Drawing::Size(25, 23);
+			this->moveLeftButton->TabIndex = 37;
+			this->moveLeftButton->Text = L"<";
+			this->moveLeftButton->UseVisualStyleBackColor = true;
+			this->moveLeftButton->Click += gcnew System::EventHandler(this, &Form1::moveLeftButton_Click);
 			// 
-			// button7
+			// moveRightButton
 			// 
-			this->button7->Location = System::Drawing::Point(751, 468);
-			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(25, 23);
-			this->button7->TabIndex = 38;
-			this->button7->Text = L">";
-			this->button7->UseVisualStyleBackColor = true;
+			this->moveRightButton->Location = System::Drawing::Point(751, 468);
+			this->moveRightButton->Name = L"moveRightButton";
+			this->moveRightButton->Size = System::Drawing::Size(25, 23);
+			this->moveRightButton->TabIndex = 38;
+			this->moveRightButton->Text = L">";
+			this->moveRightButton->UseVisualStyleBackColor = true;
+			this->moveRightButton->Click += gcnew System::EventHandler(this, &Form1::moveRightButton_Click);
 			// 
-			// button8
+			// lookUpButton
 			// 
-			this->button8->Location = System::Drawing::Point(726, 445);
-			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(25, 23);
-			this->button8->TabIndex = 39;
-			this->button8->Text = L"^";
-			this->button8->UseVisualStyleBackColor = true;
-			this->button8->Click += gcnew System::EventHandler(this, &Form1::button8_Click);
+			this->lookUpButton->Location = System::Drawing::Point(726, 445);
+			this->lookUpButton->Name = L"lookUpButton";
+			this->lookUpButton->Size = System::Drawing::Size(25, 23);
+			this->lookUpButton->TabIndex = 39;
+			this->lookUpButton->Text = L"^";
+			this->lookUpButton->UseVisualStyleBackColor = true;
+			this->lookUpButton->Click += gcnew System::EventHandler(this, &Form1::lookUpButton_Click);
 			// 
-			// button9
+			// lookLeftButton
 			// 
-			this->button9->Location = System::Drawing::Point(701, 445);
-			this->button9->Name = L"button9";
-			this->button9->Size = System::Drawing::Size(25, 23);
-			this->button9->TabIndex = 40;
-			this->button9->Text = L"L";
-			this->button9->UseVisualStyleBackColor = true;
+			this->lookLeftButton->Location = System::Drawing::Point(701, 445);
+			this->lookLeftButton->Name = L"lookLeftButton";
+			this->lookLeftButton->Size = System::Drawing::Size(25, 23);
+			this->lookLeftButton->TabIndex = 40;
+			this->lookLeftButton->Text = L"L";
+			this->lookLeftButton->UseVisualStyleBackColor = true;
+			this->lookLeftButton->Click += gcnew System::EventHandler(this, &Form1::lookLeftButton_Click);
 			// 
-			// button10
+			// lookRightButton
 			// 
-			this->button10->Location = System::Drawing::Point(751, 445);
-			this->button10->Name = L"button10";
-			this->button10->Size = System::Drawing::Size(25, 23);
-			this->button10->TabIndex = 41;
-			this->button10->Text = L"R";
-			this->button10->UseVisualStyleBackColor = true;
+			this->lookRightButton->Location = System::Drawing::Point(751, 445);
+			this->lookRightButton->Name = L"lookRightButton";
+			this->lookRightButton->Size = System::Drawing::Size(25, 23);
+			this->lookRightButton->TabIndex = 41;
+			this->lookRightButton->Text = L"R";
+			this->lookRightButton->UseVisualStyleBackColor = true;
+			this->lookRightButton->Click += gcnew System::EventHandler(this, &Form1::lookRightButton_Click);
 			// 
-			// button11
+			// lookDownButton
 			// 
-			this->button11->Location = System::Drawing::Point(726, 468);
-			this->button11->Name = L"button11";
-			this->button11->Size = System::Drawing::Size(25, 23);
-			this->button11->TabIndex = 42;
-			this->button11->Text = L"D";
-			this->button11->UseVisualStyleBackColor = true;
+			this->lookDownButton->Location = System::Drawing::Point(726, 468);
+			this->lookDownButton->Name = L"lookDownButton";
+			this->lookDownButton->Size = System::Drawing::Size(25, 23);
+			this->lookDownButton->TabIndex = 42;
+			this->lookDownButton->Text = L"D";
+			this->lookDownButton->UseVisualStyleBackColor = true;
+			this->lookDownButton->Click += gcnew System::EventHandler(this, &Form1::lookDownButton_Click);
 			// 
-			// button12
+			// moveForwardButton
 			// 
-			this->button12->Location = System::Drawing::Point(776, 445);
-			this->button12->Name = L"button12";
-			this->button12->Size = System::Drawing::Size(25, 23);
-			this->button12->TabIndex = 43;
-			this->button12->Text = L"F";
-			this->button12->UseVisualStyleBackColor = true;
-			this->button12->Click += gcnew System::EventHandler(this, &Form1::button12_Click);
+			this->moveForwardButton->Location = System::Drawing::Point(776, 445);
+			this->moveForwardButton->Name = L"moveForwardButton";
+			this->moveForwardButton->Size = System::Drawing::Size(25, 23);
+			this->moveForwardButton->TabIndex = 43;
+			this->moveForwardButton->Text = L"F";
+			this->moveForwardButton->UseVisualStyleBackColor = true;
+			this->moveForwardButton->Click += gcnew System::EventHandler(this, &Form1::moveForwardButton_Click);
 			// 
-			// button13
+			// moveBackwardButton
 			// 
-			this->button13->Location = System::Drawing::Point(776, 468);
-			this->button13->Name = L"button13";
-			this->button13->Size = System::Drawing::Size(26, 23);
-			this->button13->TabIndex = 44;
-			this->button13->Text = L"B";
-			this->button13->UseVisualStyleBackColor = true;
+			this->moveBackwardButton->Location = System::Drawing::Point(776, 468);
+			this->moveBackwardButton->Name = L"moveBackwardButton";
+			this->moveBackwardButton->Size = System::Drawing::Size(26, 23);
+			this->moveBackwardButton->TabIndex = 44;
+			this->moveBackwardButton->Text = L"B";
+			this->moveBackwardButton->UseVisualStyleBackColor = true;
+			this->moveBackwardButton->Click += gcnew System::EventHandler(this, &Form1::moveBackwardButton_Click);
 			// 
 			// x
 			// 
@@ -468,26 +485,26 @@ namespace test {
 			this->label5->TabIndex = 46;
 			this->label5->Text = L"y";
 			// 
-			// textBox1
+			// camxBox
 			// 
-			this->textBox1->Location = System::Drawing::Point(826, 419);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(37, 20);
-			this->textBox1->TabIndex = 47;
+			this->camxBox->Location = System::Drawing::Point(826, 419);
+			this->camxBox->Name = L"camxBox";
+			this->camxBox->Size = System::Drawing::Size(37, 20);
+			this->camxBox->TabIndex = 47;
 			// 
-			// textBox2
+			// camyBox
 			// 
-			this->textBox2->Location = System::Drawing::Point(826, 443);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(37, 20);
-			this->textBox2->TabIndex = 48;
+			this->camyBox->Location = System::Drawing::Point(826, 443);
+			this->camyBox->Name = L"camyBox";
+			this->camyBox->Size = System::Drawing::Size(37, 20);
+			this->camyBox->TabIndex = 48;
 			// 
-			// textBox3
+			// camzBox
 			// 
-			this->textBox3->Location = System::Drawing::Point(826, 468);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(37, 20);
-			this->textBox3->TabIndex = 49;
+			this->camzBox->Location = System::Drawing::Point(826, 468);
+			this->camzBox->Name = L"camzBox";
+			this->camzBox->Size = System::Drawing::Size(37, 20);
+			this->camzBox->TabIndex = 49;
 			// 
 			// label6
 			// 
@@ -525,19 +542,19 @@ namespace test {
 			this->Controls->Add(this->comboBox2);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->textBox3);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->camzBox);
+			this->Controls->Add(this->camyBox);
+			this->Controls->Add(this->camxBox);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->x);
-			this->Controls->Add(this->button13);
-			this->Controls->Add(this->button12);
-			this->Controls->Add(this->button11);
-			this->Controls->Add(this->button10);
-			this->Controls->Add(this->button9);
-			this->Controls->Add(this->button8);
-			this->Controls->Add(this->button7);
-			this->Controls->Add(this->button6);
+			this->Controls->Add(this->moveBackwardButton);
+			this->Controls->Add(this->moveForwardButton);
+			this->Controls->Add(this->lookDownButton);
+			this->Controls->Add(this->lookRightButton);
+			this->Controls->Add(this->lookLeftButton);
+			this->Controls->Add(this->lookUpButton);
+			this->Controls->Add(this->moveRightButton);
+			this->Controls->Add(this->moveLeftButton);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->button5);
 			this->Controls->Add(this->button4);
@@ -665,7 +682,8 @@ private: System::Void pictureBox_MouseDown(System::Object^  sender, System::Wind
 private: System::Void pictureBox_MouseUp(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
 			 Point mouseLeave = Point(e->X,e->Y);
 			 System::Console::WriteLine("dx="+(mouseLeave.X - mouseDown.X)+" dy="+(mouseLeave.Y - mouseDown.Y)); 
-			 sceneRenderer->moveCamera((mouseLeave.X - mouseDown.X), (mouseLeave.Y - mouseDown.Y));
+			 sceneRenderer->moveCamera(0,0,0, double(mouseLeave.X - mouseDown.X)/100, double(mouseLeave.Y - mouseDown.Y)/100);
+			 //this->sceneRenderer->render();
 			 //System::Threading::Thread ^ t = gcnew System::Threading::Thread(gcnew System::Threading::ThreadStart(sr, &SceneRenderer::render));
 			 //t->Start();
 		 }
@@ -673,10 +691,8 @@ private: System::Void label1_Click(System::Object^  sender, System::EventArgs^  
 		 }
 private: System::Void label2_Click(System::Object^  sender, System::EventArgs^  e) {
 		 }
-private: System::Void button8_Click(System::Object^  sender, System::EventArgs^  e) {
-		 }
-private: System::Void button12_Click(System::Object^  sender, System::EventArgs^  e) {
-		 }
+
+
 /*public: System::Void render(Object^ data) {
 			sceneRenderer->render();
 		}*/
@@ -714,6 +730,8 @@ private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, Sy
 				System::Console::WriteLine("Error : "+gcnew String(ex.what()));
 			}
 
+			refreshCameraPosition();
+
 			std::vector<std::string> objectsNames = this->manager->getObjects3D()->getNames();
 			for(std::vector<std::string>::iterator it = objectsNames.begin(); it != objectsNames.end(); it++) {
 				object3DListBox->Items->Add(gcnew String((*it).c_str()), CheckState::Checked );
@@ -730,6 +748,52 @@ private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, Sy
 			}
 
 			System::Console::WriteLine("Configuration loaded!");
+		 }
+private: System::Void lookLeftButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(0,0,0,-0.5,0);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void lookUpButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(0,0,0,0,0.5);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void lookRightButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(0,0,0,0.5,0);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void moveForwardButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(20,0,0,0,0);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void moveLeftButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(0,20,0,0,0);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void lookDownButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(0,0,0,0,-0.5);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void moveRightButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(0,-20,0,0,0);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void moveBackwardButton_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->sceneRenderer->moveCamera(-20,0,0,0,0);
+			 refreshCameraPosition();
+			 this->sceneRenderer->render();
+		 }
+private: System::Void refreshCameraPosition() {
+			 P3 pos = this->sceneRenderer->getCameraScreen()->getPosition();
+			 this->camxBox->Text = pos.x.ToString();
+			 this->camyBox->Text = pos.y.ToString();
+			 this->camzBox->Text = pos.z.ToString();
 		 }
 };
 

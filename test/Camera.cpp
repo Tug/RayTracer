@@ -30,7 +30,16 @@ Camera::~Camera() {
 }
 
 void Camera::move(P3 & deltaPos) {
-	position = position + deltaPos;
+	P3S sleftDir = P3S(direction);
+	sleftDir.u -= M_PI/2;
+	P3 leftDir(sleftDir);
+	P3 topDir = direction ^ leftDir;
+	position = position + (deltaPos.x * direction) + (deltaPos.y * leftDir) + (deltaPos.z * topDir);
+	reinit();
+}
+
+void Camera::rotate(P3S & deltaDir) {
+	direction = direction + P3(deltaDir);
 	reinit();
 }
 

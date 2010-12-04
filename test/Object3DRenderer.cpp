@@ -37,3 +37,7 @@ CameraScreen * Object3DRenderer::getCameraScreen() {
 void Object3DRenderer::setVisible(bool visible) {
 	this->visible = visible;
 }
+
+bool Object3DRenderer::isVisible() {
+	return visible;
+}
