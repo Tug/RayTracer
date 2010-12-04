@@ -390,6 +390,9 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Fichiers d%27en-tête\util</Filter>
     </ClInclude>
+    <ClInclude Include="Manager.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

@@ -8,6 +8,7 @@ Object3DRenderer::Object3DRenderer(Object3D * object3D, Scene * scene, CameraScr
 	this->scene = scene;
 	this->cameraScreen = cameraScreen;
 	this->observerPosition = cameraScreen->getPosition();
+	this->visible = true;
 }
 
 Object3DRenderer::~Object3DRenderer() {
@@ -31,4 +32,8 @@ Scene * Object3DRenderer::getScene(){
 
 CameraScreen * Object3DRenderer::getCameraScreen() {
 	return cameraScreen;
+}
+
+void Object3DRenderer::setVisible(bool visible) {
+	this->visible = visible;
 }

@@ -2,8 +2,8 @@
 
 #include "PolyhedronModel.h"
 
-PolyhedronModel::PolyhedronModel(Polyhedron * polyhedron) : PlaneModel() {
-	this->polyhedron = polyhedron;
+PolyhedronModel::PolyhedronModel() : PlaneModel() {
+
 }
 
 PolyhedronModel::~PolyhedronModel() {

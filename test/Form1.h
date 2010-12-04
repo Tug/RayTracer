@@ -60,7 +60,7 @@ namespace test {
 			System::Drawing::Graphics^ g = picImage->CreateGraphics();
 			WinScreen * screen = new WinScreen(gcroot<System::Drawing::Graphics^>(g), WIDTH, HEIGHT);
 			this->sceneRenderer = new SceneRenderer(screen);
-			this->manager = new ObjectManager();
+			this->manager = new Manager();
 		}
 
 	protected:
@@ -80,22 +80,11 @@ namespace test {
 	//private: SceneRenderer^ sr;
 	private: Point mouseDown;
 	private: SceneRenderer * sceneRenderer;
-	private: ObjectManager * manager;
+	private: Manager * manager;
 	private: String ^ configDir;
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::OpenFileDialog^  dlgOpenFile;
 	private: System::Windows::Forms::PictureBox^      picImage;
-
-
-
 
 
 	private:
@@ -659,10 +648,20 @@ namespace test {
 				System::Console::WriteLine("Loading configuration file...");
 				try {
 					Config config(stdAbsPath);
-					config.load(this->sceneRenderer, this->manager);
+					config.load(this->manager);
 				} catch(std::exception & ex) {
 					System::Console::WriteLine("Error : "+gcnew String(ex.what()));
 				}
+
+				loadSceneRenderer();
+				std::vector<std::string> objectsNames = this->manager->getObjects3DNames();
+			for(std::vector<std::string>::iterator it = objectsNames.begin(); it != objectsNames.end(); it++) {
+				object3DListBox->Items->Add(gcnew String((*it).c_str()));
+			}
+			std::vector<std::string> lightsNames = this->manager->getLightSourcesNames();
+			for(std::vector<std::string>::iterator it = lightsNames.begin(); it != lightsNames.end(); it++) {
+				lightsListBox->Items->Add(gcnew String((*it).c_str()));
+			}
 				System::Console::WriteLine("Configuration loaded!");
 
 				curItem = comboBox1->SelectedItem->ToString();
@@ -725,6 +724,10 @@ private: System::Void button12_Click(System::Object^  sender, System::EventArgs^
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 		 }
 private: System::Void comboBox2_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void loadSceneRenderer() {
+			
+			
 		 }
 };
 

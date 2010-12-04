@@ -35,7 +35,4 @@ bool Polyhedron::intersect(Ray & ray, double * distFromSource) {
 	return intersec;
 }
 
-P3 Polyhedron::getNormal(P3 & surfPoint) {
-	return P3(0,0,0);
-}
 

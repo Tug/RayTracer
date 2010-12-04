@@ -17,6 +17,7 @@ public:
 	Model * getModel();
 	Scene * getScene();
 	CameraScreen * getCameraScreen();
+	void setVisible(bool visible);
 
 protected:
 	Object3D * object3D;
@@ -24,6 +25,7 @@ protected:
 	Scene * scene;
 	CameraScreen * cameraScreen;
 	P3 observerPosition;
+	bool visible;
 };
 
 

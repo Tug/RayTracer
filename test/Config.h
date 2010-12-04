@@ -23,7 +23,7 @@
 #include "RayTracing.h"
 #include "Screen.h"
 #include "Object3DRenderer.h"
-#include "ObjectManager.h"
+#include "Manager.h"
 #include "Color.h"
 #include "Object3D.h"
 #include "Sphere.h"
@@ -39,7 +39,7 @@ class Config
 public:
 	Config(std::string fileName);
 	~Config();
-	void load(SceneRenderer * sceneRenderer, ObjectManager * objectManager);
+	void load(SceneRenderer * sceneRenderer, Manager * objectManager);
 	
 private:
 	std::string fileName;

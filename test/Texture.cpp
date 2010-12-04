@@ -5,9 +5,18 @@
 //using namespace System::Drawing;
 //using namespace System;
 
-Texture::Texture(const char * name)
+Texture::Texture(const char * fileName)
 {
-	System::String ^systemstring = gcnew System::String(name);
+	this->fileName = fileName;
+}
+ 	
+Texture::~Texture()
+{
+	delete [] m_pColorMap;
+}
+
+void Texture::load() {
+	System::String ^systemstring = gcnew System::String(fileName);
 	System::Drawing::Bitmap Bmp(systemstring);
     m_wWidth  = Bmp.Width;
 	m_wHeight = Bmp.Height;
@@ -24,12 +33,6 @@ Texture::Texture(const char * name)
 	}
 	delete systemstring;
 }
- 	
-Texture::~Texture()
-{
-	delete [] m_pColorMap;
-}
-
  
 Color Texture::Interpol(double x,double y) const
 {

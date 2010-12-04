@@ -10,7 +10,7 @@ Config::Config(std::string fileName) {
 Config::~Config() {
 }
 
-void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) {
+void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
     Json::Value root;   // will contains the root value after parsing.
 	Json::Reader reader;
 
@@ -59,7 +59,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				light->setDiffuseCoef(diffuseCoefJSON.asDouble());
 			}
 			scene->addLightSource(light);
-			objectManager->addLightSource(lightName, light);
+			manager->get("LightSource")->add(lightName, light);
 		}
 	}
 
@@ -90,7 +90,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 										jsonToP3(object3DJSON["C"]));
 			}
 			scene->addObject3D(object3D);
-			objectManager->addObject3D(objectName, object3D);
+			manager->get("Object3D")->add(objectName, object3D);
 		}
 	}
 
@@ -119,11 +119,11 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				parseObjFile(filename, &triangles, centerObj, scale);
 				polyhedron = new Polyhedron(triangles);
 			} else continue;
-			std::vector<Triangle*> triangles = polyhedron->getTriangles();
+			/*std::vector<Triangle*> triangles = polyhedron->getTriangles();
 			for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
 				scene->addObject3D(*it);
-			}
-			objectManager->addObject3D(objectName, polyhedron);
+			}*/
+			manager->get("Polyhedron")->add(objectName, polyhedron);
 		}
 	}
 
@@ -134,7 +134,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 			std::string textureName = *it;
 			Json::Value textureJSON = texturesJSON[textureName];
 			Texture * texture = new Texture(textureJSON["FileName"].asString().c_str());
-			objectManager->addTexture(textureName, texture);
+			manager->get("Texture")->add(textureName, texture);
 		}
 	}
 
@@ -147,56 +147,40 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 								 cameraJSON.get("rotation", 0).asDouble());
 	sceneRenderer->setCamera(camera);
 	sceneRenderer->setCameraScreenDist(sceneRendererJSON.get("cameraScreenDist", 200).asDouble());
-	objectManager->addCamera("camera1", camera);
+	manager->get("Camera")->add("camera1", camera);
 
 	std::string methodType = sceneRendererJSON["method"].get("type", "OrthographicProjection").asString();
-	RenderingMethod * renderingMethod;
+	RenderingMethod * renderingMethod = NULL;
 	if(methodType == "OrthographicProjection") {
 		renderingMethod = new OrthographicProjection();
 	} else if(methodType == "RayCasting") {
 		renderingMethod = new RayCasting();
 	} else if(methodType == "RayTracing") {
 		renderingMethod = new RayTracing();
-	} else throw std::runtime_error("renderingMethod not defined in "+fileName);
-	sceneRenderer->setRenderingMethod(renderingMethod);
+	}
+	if(renderingMethod != NULL)
+		sceneRenderer->setRenderingMethod(renderingMethod);
+
 	Json::Value modelsJSON = sceneRendererJSON.get("models", NULL);
 	if(modelsJSON != NULL) {
-		Json::Value::Members objectsName = modelsJSON.getMemberNames();
-		for(std::vector<std::string>::iterator it = objectsName.begin(); it != objectsName.end(); it++) {
-			std::string objectName = *it;
-			Json::Value modelJSON = modelsJSON[objectName];
+		Json::Value::Members modelsName = modelsJSON.getMemberNames();
+		for(std::vector<std::string>::iterator it = modelsName.begin(); it != modelsName.end(); it++) {
+			std::string modelName = *it;
+			Json::Value modelJSON = modelsJSON[modelName];
 			Json::Value modelTypeJSON = modelJSON.get("type", NULL);
 			if(modelTypeJSON != NULL) {
 				std::string modelTypeStr = modelTypeJSON.asString();
-				Object3D * object3D = objectManager->getObject3D(objectName);
-				if(object3D == NULL) continue;
 				Model * model;
-				if( modelTypeStr == "SphereModel" 
-				 || modelTypeStr == "PlaneModel"
-				 || modelTypeStr == "TriangleModel") {
-					if(modelTypeStr == "SphereModel") {
-						model = new SphereModel();
-					} else {
-						model = new PlaneModel();
-					}
-					sceneRenderer->getObject3DRenderer(object3D)->setModel(model);
-				} else if(modelTypeStr == "PolyhedronModel"
-					   || modelTypeStr == "ParallelepipedModel"
-					   || modelTypeStr == "MayaModel") {
-					Polyhedron * polyhedron = static_cast<Polyhedron*>(object3D);
-					if(modelTypeStr == "PolyhedronModel") {
-						model = new PolyhedronModel(polyhedron);
-					} else {
-
-					}
-					std::vector<Triangle*> triangles = polyhedron->getTriangles();
-					for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
-						sceneRenderer->getObject3DRenderer(*it)->setModel(model);
-					}
+				if(modelTypeStr == "SphereModel") {
+					model = new SphereModel();
+				} else if( modelTypeStr == "PlaneModel"	|| modelTypeStr == "TriangleModel") {
+					model = new PlaneModel();
+				} else if(modelTypeStr == "PolyhedronModel" || modelTypeStr == "ParallelepipedModel" || modelTypeStr == "MayaModel") {
+					model = new PolyhedronModel();
 				}
 				Json::Value textureJSON = modelJSON.get("texture", NULL);
 				if(textureJSON != NULL) {
-					model->setTexture(objectManager->getTexture(textureJSON.asString()));
+					model->setTexture(manager->get("Texture")->add(textureJSON.asString()));
 				}
 				Json::Value colorJSON = modelJSON.get("color", NULL);
 				if(colorJSON != NULL) {
@@ -204,7 +188,7 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				}
 				Json::Value bumpJSON = modelJSON.get("bump", NULL);
 				if(bumpJSON != NULL) {
-					model->setBump(objectManager->getTexture(bumpJSON.asString()));
+					model->setBump(manager->get("Texture")->get(bumpJSON.asString()));
 				}
 				Json::Value materialJSON = modelJSON.get("material", NULL);
 				if(materialJSON != NULL) {
@@ -214,7 +198,16 @@ void Config::load(SceneRenderer * sceneRenderer, ObjectManager * objectManager) 
 				if(textureScaleJSON != NULL) {
 					model->setTextureScale(textureScaleJSON.asDouble());
 				}
-				objectManager->add(objectName+"Model", model);
+				manager->get("Model")->add(objectName, model);
+				Json::Value modelObjectsJSON = modelJSON.get("objects", NULL);
+				if(modelObjectsJSON != NULL) {
+					for(int i=0; i < modelObjectsJSON.size(); i++) {
+						std::string objectName = modelObjectsJSON[i].asString();
+						Object3D * object3D = manager->get("Object3D")->get(objectName);
+						if(object3D == NULL) continue;
+						sceneRenderer->getObject3DRenderer(object3D)->setModel(model);
+					}
+				}
 			}
 		}
 	}

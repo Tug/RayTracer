@@ -166,6 +166,7 @@
     <ClInclude Include="jsoncpp\json_reader.h" />
     <ClInclude Include="jsoncpp\json_value.h" />
     <ClInclude Include="jsoncpp\json_writer.h" />
+    <ClInclude Include="Manager.h" />
     <ClInclude Include="Object3DRenderer.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="OrthographicProjection.h" />

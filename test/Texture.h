@@ -17,6 +17,7 @@ class Texture
 
     public:
 		Texture(const char * FileName);
+		void load();
 		~Texture();
 				
 		// les paramètres u et v sont independants de la résolution de la texture
@@ -26,6 +27,9 @@ class Texture
 
 		Color	relativePixelColor(double u,double v) const; 
 		void	Bump (double u,double v,double &dhdu,double &dhdv) const;  // pour le bump map
+
+	private:
+		const char * fileName;
 };
 
 #endif

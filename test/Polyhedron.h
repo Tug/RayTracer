@@ -8,7 +8,7 @@
 #include "Triangle.h"
 #include <vector>
 
-class Polyhedron : public Object3D
+class Polyhedron
 {
 public:
 	Polyhedron();
@@ -16,7 +16,6 @@ public:
 	Polyhedron(std::vector<Triangle *> & triangles);
 	virtual ~Polyhedron();
 	virtual bool intersect(Ray & ray, double * distFromSource);
-	virtual P3 getNormal(P3 & surfPoint);
 	std::vector<Triangle *> & getTriangles();
 
 protected:
