@@ -18,7 +18,7 @@ int Screen::getHeight() {
 	return height;
 }
 
-void Screen::fillBackground(Color & c) {
+void Screen::fillBackground(RGBColor & c) {
 	for(int y=0; y<height; y++) {
 		for(int x=0; x<width; x++) {
 			setPixel(x, y, c);

@@ -59,14 +59,14 @@ void SceneRenderer::moveCamera(double dx, double dy, double dz, double du, doubl
 	if(dx != 0 || dy != 0 || dz != 0)
 		cameraScreen->move(P3(dx,dy,dz));
 	if(du != 0 || dv != 0)
-		cameraScreen->rotate(P3S(du,dv,1));
+		cameraScreen->rotate(du,dv);
 }
 
 Object3DRenderer * SceneRenderer::getObject3DRenderer(Object3D* object3D) {
 	if(renderersMap.find(object3D) == renderersMap.end()) {
 		Object3DRenderer * objRenderer = new Object3DRenderer(object3D, scene, cameraScreen);
 		renderersMap[object3D] = objRenderer;
-	};
+	}
 	return renderersMap[object3D];
 }
 

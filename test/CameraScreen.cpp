@@ -2,14 +2,14 @@
 
 #include "CameraScreen.h"
 
-CameraScreen::CameraScreen( P3 & position, P3 & direction, double rotation,
+CameraScreen::CameraScreen(P3 & position, P3 & direction, double rotation,
 							Screen * screen, double screenDist): Camera(position, direction, rotation) {
 	this->screen = screen;
 	this->screenDist = screenDist;
 	reinit();
 }
 
-CameraScreen::CameraScreen( Camera * camera, Screen * screen, double screenDist): Camera(camera) {
+CameraScreen::CameraScreen(Camera * camera, Screen * screen, double screenDist): Camera(camera) {
 	this->screen = screen;
 	this->screenDist = screenDist;
 	reinit();

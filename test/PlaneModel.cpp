@@ -10,7 +10,7 @@ PlaneModel::~PlaneModel() {
 }
 
 
-void PlaneModel::surfaceColorAndBump(Object3D * object3D, P3 & surfPoint, Color * color, P3 * bumpedNormal) {
+void PlaneModel::surfaceColorAndBump(Object3D * object3D, P3 & surfPoint, RGBColor * color, P3 * bumpedNormal) {
 	Plane * plane = (Plane *)object3D;
 	P3 relativePoint(plane->getP(), surfPoint);
 	double x = (relativePoint * plane->getU())/100;

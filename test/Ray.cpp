@@ -4,8 +4,8 @@
 
 Ray::Ray(P3 & source, P3 & direction) {
 	this->source = source;
+	direction.normalize();
 	this->direction = direction;
-	this->direction.normalize();
 	this->currentMediumIndex = 1.0;
 }
 

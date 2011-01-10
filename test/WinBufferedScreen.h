@@ -12,7 +12,7 @@ class WinBufferedScreen : public Screen
 public:
 	WinBufferedScreen(gcroot<System::Windows::Forms::PictureBox^> & pictureBox, int width, int height);
 	~WinBufferedScreen();
-	void setPixel(int px, int py, Color & c);
+	void setPixel(int px, int py, RGBColor & c);
 	void repaint();
 
 private:

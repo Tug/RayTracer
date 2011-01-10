@@ -3,7 +3,7 @@
 #include "Model.h"
 
 Model::Model() {
-	this->c = Color::GREY;
+	this->c = RGBColor::GREY;
 	this->texture = 0;
 	this->material = Material();
 	this->bump = 0;
@@ -13,7 +13,11 @@ Model::Model() {
 Model::~Model() {
 }
 
-Color Model::getColor(double x, double y) {
+RGBColor & Model::getColor() {
+	return c;
+}
+
+RGBColor Model::getColor(double x, double y) {
 	if(texture) {
 		return texture->relativePixelColor(x/textureScale, y/textureScale);
 	}
@@ -54,7 +58,7 @@ void Model::setTexture(Texture * texture) {
 	this->texture = texture;
 }
 
-void Model::setColor(Color & c) {
+void Model::setColor(RGBColor & c) {
 	this->c = c;
 }
 

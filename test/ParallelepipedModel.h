@@ -12,7 +12,7 @@ class ParallelepipedModel : public PolyhedronModel
 public:
 	ParallelepipedModel(Polyhedron * polyhedron);
 	~ParallelepipedModel();
-	virtual void surfaceColorAndBump(Object3D * object3D, P3 & surfPoint, Color * color, P3 * bumpedNormal);
+	virtual void surfaceColorAndBump(Object3D * object3D, P3 & surfPoint, RGBColor * color, P3 * bumpedNormal);
 };
 
 

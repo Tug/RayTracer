@@ -12,9 +12,9 @@ public:
 	//WinScreen(gcroot<System::Windows::Forms::PictureBox^> & pictureBox, int width, int height);
 	WinScreen(gcroot<System::Drawing::Graphics^> & g, int width, int height);
 	~WinScreen();
-	void setPixel(int px, int py, Color & c);
+	void setPixel(int px, int py, RGBColor & c);
 	void repaint();
-	virtual void fillBackground(Color & c);
+	virtual void fillBackground(RGBColor & c);
 
 private:
 	gcroot<System::Drawing::Graphics^> g;

@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 Scene::Scene() {
-	this->backgroundColor = Color(0,0,0);
+	this->backgroundColor = RGBColor(0,0,0);
 }
 
 Scene::~Scene() {
@@ -53,11 +53,11 @@ void Scene::removeAll() {
 }
 
 
-Color & Scene::getBackgroundColor() {
+RGBColor & Scene::getBackgroundColor() {
 	return backgroundColor;
 }
 
-void Scene::setBackgroundColor(Color & color) {
+void Scene::setBackgroundColor(RGBColor & color) {
 	this->backgroundColor = color;
 }
 

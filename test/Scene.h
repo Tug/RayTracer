@@ -24,13 +24,13 @@ public:
 	void removeAllObjects3D();
 	void removeAllLightSources();
 	void removeAll();
-	Color & getBackgroundColor();
-	void setBackgroundColor(Color & color);
+	RGBColor & getBackgroundColor();
+	void setBackgroundColor(RGBColor & color);
 
 private:
 	std::vector<LightSource *> lights;
 	std::vector<Object3D *> objects;
-	Color backgroundColor;
+	RGBColor backgroundColor;
 };
 
 

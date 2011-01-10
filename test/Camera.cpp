@@ -38,11 +38,6 @@ void Camera::move(P3 & deltaPos) {
 	reinit();
 }
 
-void Camera::rotate(P3S & deltaDir) {
-	direction = direction + P3(deltaDir);
-	reinit();
-}
-
 void Camera::rotate(double u, double v) {
 	P3S ps(direction);
 	ps.u += u;

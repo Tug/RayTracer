@@ -3,7 +3,7 @@
 #include "RayTracing.h"
 
 RayTracing::RayTracing() : RenderingMethod() {
-	this->maxDepth = 1;
+	this->maxDepth = 3;
 }
 
 RayTracing::~RayTracing() {
@@ -29,7 +29,7 @@ void RayTracing::drawScene(SceneRenderer * sceneRenderer, Zone & renderingZone) 
 	Scene * scene = sceneRenderer->getScene();
 	P3 cameraPos = cameraScreen->getPosition();
 	Screen * screen = cameraScreen->getScreen();
-	Color backGround = sceneRenderer->getScene()->getBackgroundColor();
+	RGBColor backGround = sceneRenderer->getScene()->getBackgroundColor();
 	for(int y=renderingZone.y; y<renderingZone.height; y++) {
 		for(int x=renderingZone.x; x<renderingZone.width; x++) {
 			P3 R1 = cameraScreen->get3DPoint(x, y);
@@ -40,24 +40,24 @@ void RayTracing::drawScene(SceneRenderer * sceneRenderer, Zone & renderingZone) 
 	}
 }
 
-Color RayTracing::throwRay(SceneRenderer * sceneRenderer, Ray & ray, int depth) {
+RGBColor RayTracing::throwRay(SceneRenderer * sceneRenderer, Ray & ray, int depth) {
 	CameraScreen * cameraScreen = sceneRenderer->getCameraScreen();
 	P3 cameraPos = cameraScreen->getPosition();
-	Color backGround = sceneRenderer->getScene()->getBackgroundColor();
+	RGBColor backGround = sceneRenderer->getScene()->getBackgroundColor();
 	Scene * scene = sceneRenderer->getScene();
 	std::vector<Object3D *> objects = scene->getObjects3D();
 	std::vector<LightSource *> lights = scene->getLightSources();
 	std::vector<LightSource *>::iterator itlights;
 	double yMin;
 	Object3D * closestObj = NULL;
-	Color pixCol(0,0,0);
+	RGBColor pixCol(0,0,0);
 	if(!intersectObject(objects, ray, &closestObj, &yMin)) {
 		pixCol = backGround;
 	} else {
 		Object3DRenderer * closestObjRenderer = sceneRenderer->getObject3DRenderer(closestObj);
 		Model * model = closestObjRenderer->getModel();
 		P3 surfPoint = ray.get3DPoint(yMin);
-		Color objectColor;
+		RGBColor objectColor;
 		P3 bumpedNormal;
 		model->surfaceColorAndBump(closestObj, surfPoint, &objectColor, &bumpedNormal);
 		for(itlights = lights.begin(); itlights != lights.end(); itlights++) {

@@ -24,10 +24,10 @@ bool Triangle::intersect(Ray & ray, double * distFromSource) {
 	P3 distV = P3(R0, p);
 	P3 N = normN * normal;
 	double nr = N * Rd;
-	if(fabs(nr) < 0.01) return false; // colineaire
+	if(fabs(nr) < 0.001) return false; // colineaire
 	double ir = (N * distV) / nr;
 	*distFromSource = ir;
-	if (ir < 0.0) return false;
+	if (ir < 0.001) return false;
 	double iu = -((distV ^ AC) * Rd) / nr;
 	double iv = -((AB ^ distV) * Rd) / nr;
 	*distFromSource = ir;

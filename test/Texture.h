@@ -2,7 +2,7 @@
 #define _H_Texture
 
 #include "P3.h"
-#include "Color.h"
+#include "RGBColor.h"
 #include <string>
 
 // classe handling textures
@@ -10,10 +10,10 @@
 class Texture
 {
 	protected:
-		Color *m_pColorMap;
+		RGBColor *m_pColorMap;
 		int	m_wWidth,m_wHeight;
-		Color Interpol(double x,double y) const;
-		Color GetColor(int x,int y) const;
+		RGBColor Interpol(double x,double y) const;
+		RGBColor GetColor(int x,int y) const;
 
     public:
 		Texture(std::string fileName);
@@ -25,8 +25,9 @@ class Texture
 		// une valeur hors de la plage [0,1] est tronquée pour la ramener dans cette plage
 		// ainsi (2.3,4.5) => (0.3,0.5)
 
-		Color	relativePixelColor(double u,double v) const; 
+		RGBColor	relativePixelColor(double u,double v) const; 
 		void	Bump (double u,double v,double &dhdu,double &dhdv) const;  // pour le bump map
+		std::string & getFileName();
 
 	private:
 		std::string fileName;

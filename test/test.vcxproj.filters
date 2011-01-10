@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Fichiers de ressources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête\light">
       <UniqueIdentifier>{2a902685-91d6-44dd-937d-6cb66d4d7594}</UniqueIdentifier>
     </Filter>
@@ -67,8 +63,12 @@
     <Filter Include="Fichiers sources\util\externallib\json">
       <UniqueIdentifier>{78bd917a-261c-4c02-a32d-4fb4b7d6be67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Fichiers d%27en-tête\gui">
+    <Filter Include="Fichiers d%27en-tête\windows\gui">
       <UniqueIdentifier>{fe03a7e9-a255-49ae-b06c-d1d334346fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,13 +86,7 @@
     <None Include="jsoncpp\json_valueiterator.inl">
       <Filter>Fichiers d%27en-tête\util\externallib\json</Filter>
     </None>
-    <None Include="config\default.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </None>
     <None Include="config\bump2spheres.txt">
-      <Filter>Fichiers de ressources</Filter>
-    </None>
-    <None Include="config\transparence2spheres.txt">
       <Filter>Fichiers de ressources</Filter>
     </None>
     <None Include="config\terre.txt">
@@ -105,6 +99,18 @@
       <Filter>Fichiers de ressources</Filter>
     </None>
     <None Include="config\triangle.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="terrepole.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\maya.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\transparencebump2spheres.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
+    <None Include="config\transparencespheres.txt">
       <Filter>Fichiers de ressources</Filter>
     </None>
   </ItemGroup>
@@ -126,9 +132,6 @@
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
       <Filter>Fichiers sources\object3d</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>Fichiers sources\util</Filter>
     </ClCompile>
     <ClCompile Include="Object3D.cpp">
       <Filter>Fichiers sources\object3d</Filter>
@@ -224,10 +227,7 @@
       <Filter>Fichiers sources\rendering\model</Filter>
     </ClCompile>
     <ClCompile Include="SphereEditor.cpp">
-      <Filter>Fichiers d%27en-tête\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneEditor.cpp">
-      <Filter>Fichiers d%27en-tête\gui</Filter>
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
     </ClCompile>
     <ClCompile Include="CameraScreen.cpp">
       <Filter>Fichiers sources\util</Filter>
@@ -237,6 +237,27 @@
     </ClCompile>
     <ClCompile Include="Manager.cpp">
       <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3DEditor.cpp">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="winutil.cpp">
+      <Filter>Fichiers sources\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSourceEditor.cpp">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLightSourceEditor.cpp">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBColor.cpp">
+      <Filter>Fichiers sources\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Parallelogram.cpp">
+      <Filter>Fichiers sources\object3d</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelEditor.cpp">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,9 +286,6 @@
       <Filter>Fichiers d%27en-tête\util</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Fichiers d%27en-tête\util</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
       <Filter>Fichiers d%27en-tête\util</Filter>
     </ClInclude>
     <ClInclude Include="Zone.h">
@@ -382,16 +400,37 @@
       <Filter>Fichiers d%27en-tête\rendering\model</Filter>
     </ClInclude>
     <ClInclude Include="SphereEditor.h">
-      <Filter>Fichiers d%27en-tête\gui</Filter>
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
     </ClInclude>
     <ClInclude Include="PlaneEditor.h">
-      <Filter>Fichiers d%27en-tête\gui</Filter>
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
     </ClInclude>
     <ClInclude Include="Manager.h">
       <Filter>Fichiers d%27en-tête\util</Filter>
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3DEditor.h">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="winutil.h">
+      <Filter>Fichiers d%27en-tête\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSourceEditor.h">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLightSourceEditor.h">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBColor.h">
+      <Filter>Fichiers d%27en-tête\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Parallelogram.h">
+      <Filter>Fichiers d%27en-tête\object3d</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelEditor.h">
+      <Filter>Fichiers d%27en-tête\windows\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +446,18 @@
       <Filter>Fichiers de ressources</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="SphereEditor.resx">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Object3DEditor.resx">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LightSourceEditor.resx">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelEditor.resx">
+      <Filter>Fichiers de ressources</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PointLightSourceEditor.resx">
       <Filter>Fichiers de ressources</Filter>
     </EmbeddedResource>
   </ItemGroup>

@@ -12,9 +12,6 @@
       ,"sphere3": {"type": "Sphere", "center": {"x":200, "y":730, "z":220}, "radius": 50}
       ,"triangle1": {"type": "Triangle", "A": {"x":400, "y":200, "z":200}, "B": {"x":550, "y":200, "z":200}, "C": {"x":400, "y":300, "z":0}}
     }
-    ,"polyhedra" : {
-      "cube1": {"type": "Parallelepiped", "A": {"x":400, "y":500, "z":100}, "B": {"x":430, "y":500, "z":100}, "C": {"x":400, "y":530, "z":100}}
-    }
   }
   ,"textures": {
 		 "goldTex":  {"FileName": "textures//gold.jpg"}
@@ -50,11 +47,6 @@
         ,"objects": [ "sphere3" ]
         ,"color": "RED"
       }
-      //,"cubemodel1": {
-        //"type": "ParallelepipedModel"
-        //,"objects": [ "cube1" ]
-        //,"texture": "brickTex"
-      //}
       ,"trianglemodel1": {
         "type": "PlaneModel"
         ,"objects": [ "triangle1" ]

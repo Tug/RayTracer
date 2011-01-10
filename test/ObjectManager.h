@@ -13,12 +13,15 @@ public:
 
 	std::vector<std::string> getNames();
 	void add(std::string name, T obj);
+	void add(std::string name, T obj, std::string type);
 	T get(std::string name);
+	std::string getType(T obj);
 	void Delete(std::string name);
 	void deleteAll();
 
 protected:
-	std::map<std::string, T > objects;
+	std::map<std::string, T> objects;
+	std::map<T, std::string> types;
 };
 
 
@@ -35,6 +38,7 @@ ObjectManager<T>::~ObjectManager() {
 template<typename T> 
 void ObjectManager<T>::deleteAll() {
 	objects.clear();
+	types.clear();
 }
 
 template<typename T>
@@ -53,6 +57,12 @@ void ObjectManager<T>::add(std::string name, T obj) {
 	objects[name] = obj;
 }
 
+template<typename T> 
+void ObjectManager<T>::add(std::string name, T obj, std::string type) {
+	this->add(name, obj);
+	types[obj] = type;
+}
+
 template<typename T>
 T ObjectManager<T>::get(std::string name) {
 	if(objects.find(name) == objects.end())
@@ -60,9 +70,19 @@ T ObjectManager<T>::get(std::string name) {
 	else return objects[name];
 }
 
+template<typename T>
+std::string ObjectManager<T>::getType(T obj) {
+	return types[obj];
+}
+
 template<typename T> 
-void ObjectManager<T>::Delete(std::string name) { 
+void ObjectManager<T>::Delete(std::string name) {
+	T obj = objects[name];
+	if(types.find(obj) != types.end()) {
+		types.erase(obj);
+	}
 	objects.erase(name);
+
 }
 
 

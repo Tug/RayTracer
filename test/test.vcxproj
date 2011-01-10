@@ -94,32 +94,38 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="config\bump2spheres.txt" />
     <None Include="config\cube.txt" />
-    <None Include="config\default.txt" />
+    <None Include="config\maya.txt" />
     <None Include="config\plane.txt" />
     <None Include="config\terre.txt" />
-    <None Include="config\transparence2spheres.txt" />
+    <None Include="config\transparencebump2spheres.txt" />
+    <None Include="config\transparencespheres.txt" />
     <None Include="config\triangle.txt" />
     <None Include="jsoncpp\json_internalarray.inl" />
     <None Include="jsoncpp\json_internalmap.inl" />
     <None Include="jsoncpp\json_valueiterator.inl" />
     <None Include="ReadMe.txt" />
+    <None Include="terrepole.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AmbientLightSource.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraScreen.cpp" />
-    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="ModelEditor.cpp" />
+    <ClCompile Include="Parallelogram.cpp" />
+    <ClCompile Include="RGBColor.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="jsoncpp\json_reader.cpp" />
     <ClCompile Include="jsoncpp\json_value.cpp" />
     <ClCompile Include="jsoncpp\json_writer.cpp" />
+    <ClCompile Include="LightSourceEditor.cpp" />
     <ClCompile Include="Manager.cpp" />
+    <ClCompile Include="Object3DEditor.cpp" />
     <ClCompile Include="Object3DRenderer.cpp" />
     <ClCompile Include="OrthographicProjection.cpp" />
     <ClCompile Include="Plane.cpp" />
-    <ClCompile Include="PlaneEditor.cpp" />
     <ClCompile Include="PlaneModel.cpp" />
+    <ClCompile Include="PointLightSourceEditor.cpp" />
     <ClCompile Include="Polyhedron.cpp" />
     <ClCompile Include="PolyhedronModel.cpp" />
     <ClCompile Include="Rasterization.cpp" />
@@ -150,13 +156,18 @@
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="WinScreen.cpp" />
+    <ClCompile Include="winutil.cpp" />
     <ClCompile Include="ZBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmbientLightSource.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraScreen.h" />
-    <ClInclude Include="Color.h" />
+    <ClInclude Include="ModelEditor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Parallelogram.h" />
+    <ClInclude Include="RGBColor.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="jsoncpp\json.h" />
     <ClInclude Include="jsoncpp\json_autolink.h" />
@@ -167,7 +178,13 @@
     <ClInclude Include="jsoncpp\json_reader.h" />
     <ClInclude Include="jsoncpp\json_value.h" />
     <ClInclude Include="jsoncpp\json_writer.h" />
+    <ClInclude Include="LightSourceEditor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Manager.h" />
+    <ClInclude Include="Object3DEditor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Object3DRenderer.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="OrthographicProjection.h" />
@@ -176,6 +193,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="PlaneModel.h" />
+    <ClInclude Include="PointLightSourceEditor.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Polyhedron.h" />
     <ClInclude Include="PolyhedronModel.h" />
     <ClInclude Include="Rasterization.h" />
@@ -208,6 +228,7 @@
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="WinBufferedScreen.h" />
     <ClInclude Include="WinScreen.h" />
+    <ClInclude Include="winutil.h" />
     <ClInclude Include="ZBuffer.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
@@ -219,8 +240,20 @@
       <DependentUpon>Form1.h</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="LightSourceEditor.resx">
+      <DependentUpon>LightSourceEditor.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelEditor.resx">
+      <DependentUpon>ModelEditor.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Object3DEditor.resx">
+      <DependentUpon>Object3DEditor.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlaneEditor.resx">
       <DependentUpon>PlaneEditor.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PointLightSourceEditor.resx">
+      <DependentUpon>PointLightSourceEditor.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SphereEditor.resx">
       <DependentUpon>SphereEditor.h</DependentUpon>

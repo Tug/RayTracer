@@ -38,11 +38,12 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 		for(std::vector<std::string>::iterator it = lightsName.begin(); it != lightsName.end(); it++) {
 			std::string lightName = *it;
 			Json::Value lightJSON = lightsJSON[lightName];
-			Color lightColor = jsonToColor(lightJSON["color"]);
+			RGBColor lightColor = jsonToColor(lightJSON["color"]);
 			LightSource * light;
-			if(lightJSON["type"].asString() == "AmbientLightSource") {
+			std::string lightTypeStr = lightJSON["type"].asString();
+			if(lightTypeStr == "AmbientLightSource") {
 				light = new AmbientLightSource(lightColor);
-			} else if(lightJSON["type"].asString() == "PointLightSource") {
+			} else if(lightTypeStr == "PointLightSource") {
 				light = new PointLightSource(jsonToP3(lightJSON["position"]), lightColor);
 				Json::Value specularCoefJSON = lightJSON.get("specularCoef", NULL);
 				PointLightSource * pLight = static_cast<PointLightSource*>(light);
@@ -58,8 +59,8 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 			if(diffuseCoefJSON != NULL) {
 				light->setDiffuseCoef(diffuseCoefJSON.asDouble());
 			}
-			scene->addLightSource(light);
-			manager->getLightSources()->add(lightName, light);
+			//scene->addLightSource(light);
+			manager->getLightSources()->add(lightName, light, lightTypeStr);
 		}
 	}
 
@@ -89,8 +90,8 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 									    jsonToP3(object3DJSON["B"]),
 										jsonToP3(object3DJSON["C"]));
 			}
-			scene->addObject3D(object3D);
-			manager->getObjects3D()->add(objectName, object3D);
+			//scene->addObject3D(object3D);
+			manager->getObjects3D()->add(objectName, object3D, oject3DTypeStr);
 		}
 	}
 
@@ -119,11 +120,11 @@ void Config::load(SceneRenderer * sceneRenderer, Manager * manager) {
 				parseObjFile(filename, &triangles, centerObj, scale);
 				polyhedron = new Polyhedron(triangles);
 			} else continue;
-			std::vector<Triangle*> triangles = polyhedron->getTriangles();
+			/*std::vector<Triangle*> triangles = polyhedron->getTriangles();
 			for(std::vector<Triangle*>::iterator it = triangles.begin(); it != triangles.end(); it++) {
 				scene->addObject3D(*it);
-			}
-			manager->getPolyhedra()->add(objectName, polyhedron);
+			}*/
+			manager->getPolyhedra()->add(objectName, polyhedron, polyhedronTypeStr);
 		}
 	}
 
@@ -226,11 +227,11 @@ P3 Config::jsonToP3(Json::Value & p3JSON) {
 			  p3JSON["z"].asDouble());
 }
 
-Color Config::jsonToColor(Json::Value & colorJSON) {
+RGBColor Config::jsonToColor(Json::Value & colorJSON) {
 	if(colorJSON.isString()) {
-		return Color::commonColor(colorJSON.asString());
+		return RGBColor::commonColor(colorJSON.asString());
 	}
-	return Color(colorJSON["m_R"].asDouble(),
+	return RGBColor(colorJSON["m_R"].asDouble(),
 			     colorJSON["m_G"].asDouble(),
 			     colorJSON["m_B"].asDouble());
 }
@@ -267,6 +268,7 @@ bool Config::parseObjFile(std::string & filename, std::vector<Triangle*> * trian
 			char whitespace_v_x, whitespace_x_y, whitespace_y_z;
 			stringstream >> whitespace_v_x >> std::ws >> x >> whitespace_x_y >> std::ws >> y >> whitespace_y_z >> std::ws >> z >> std::ws;
 			vertices.push_back(P3(centerObj.x+scale*x,centerObj.y+scale*y,centerObj.z+scale*z));
+			//vertices.push_back(P3(x,y,z));
 		}
 		// faces
 		else if (keyword == "f") {

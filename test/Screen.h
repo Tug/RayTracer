@@ -3,7 +3,7 @@
 
 class Scene;
 
-#include "Color.h"
+#include "RGBColor.h"
 #include "ZBuffer.h"
 #include "Object3D.h"
 #include "Scene.h"
@@ -15,14 +15,14 @@ class Screen
 public:
 	Screen(int width, int height);
 	virtual ~Screen();
-	virtual void setPixel(int px, int py, Color & c) = 0;
+	virtual void setPixel(int px, int py, RGBColor & c) = 0;
 	virtual void repaint() = 0;
 	int getWidth();
 	int getHeight();
 	ZBuffer * getZBuffer();
 	void drawScene(Scene * scene);
 	void drawObject(Object3D * object3D, Scene * scene);
-	virtual void fillBackground(Color & c);
+	virtual void fillBackground(RGBColor & c);
 
 protected:
 	int width, height;

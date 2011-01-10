@@ -28,3 +28,15 @@ double Material::getTransmittance() {
 double Material::getRefractiveIndex() {
 	return refractiveIndex;
 }
+
+void Material::setReflectivity(double reflectivity) {
+	this->reflectivity = reflectivity;
+}
+
+void Material::setTransmittance(double transmittance) {
+	this->transmittance = transmittance;
+}
+
+void Material::setRefractiveIndex(double refractiveIndex) {
+	this->refractiveIndex = refractiveIndex;
+}

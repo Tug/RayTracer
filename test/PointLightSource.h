@@ -11,15 +11,17 @@
 class PointLightSource : public LightSource
 {
 public:
-	PointLightSource(P3 position, Color color, double diffuseCoef, double specularCoef, double specularExponent);
-	PointLightSource(P3 position, Color color);
+	PointLightSource(P3 position, RGBColor color, double diffuseCoef, double specularCoef, double specularExponent);
+	PointLightSource(P3 position, RGBColor color);
+	PointLightSource();
 	~PointLightSource();
 	P3 & getPosition();
 	double getSpecularCoef();
 	double getSpecularExponent();
 	void setSpecularCoef(double specularCoef);
 	void setSpecularExponent(double specularExponent);
-	Color getReflection(P3 & surfPoint, P3 & normalVec, P3 & observerPosition, Color & objectColor);
+	void setPosition(P3 & newPosition);
+	RGBColor getReflection(P3 & surfPoint, P3 & normalVec, P3 & observerPosition, RGBColor & objectColor);
 
 private:
 	P3 position;

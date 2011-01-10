@@ -4,6 +4,9 @@
 
 Sphere::Sphere() : Object3D()
 {
+	this->center = P3(0,0,0);
+	this->radius = 1;
+	this->radiusSquared = 1;
 }
 
 Sphere::Sphere(Sphere * sphere) : Object3D()

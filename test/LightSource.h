@@ -1,7 +1,7 @@
 #ifndef _H_LIGHTSOURCE
 #define _H_LIGHTSOURCE
 
-#include "Color.h"
+#include "RGBColor.h"
 #include "P3.h"
 #include "Scene.h"
 
@@ -10,16 +10,18 @@
 class LightSource
 {
 public:
-	LightSource(Color color, double diffuseCoef);
-	LightSource(Color color);
+	LightSource(RGBColor color, double diffuseCoef);
+	LightSource(RGBColor color);
+	LightSource();
 	virtual ~LightSource();
-	virtual Color & getColor();
+	virtual RGBColor & getColor();
 	double getDiffuseCoef();
 	void setDiffuseCoef(double diffuseCoef);
-	virtual Color getReflection(P3 & surfPoint, P3 & normalVec, P3 & observerPosition, Color & objectColor) = 0;
+	void setColor(RGBColor& color);
+	virtual RGBColor getReflection(P3 & surfPoint, P3 & normalVec, P3 & observerPosition, RGBColor & objectColor) = 0;
 
 protected:
-	Color color;
+	RGBColor color;
 	double diffuseCoef;
 };
 

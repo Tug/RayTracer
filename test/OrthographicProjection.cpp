@@ -38,12 +38,12 @@ void OrthographicProjection::drawObject(Object3DRenderer * object3DRenderer, Zon
 			if(object3D->intersect(ray, &depth) && zbuffer->getZ(py,px) > depth) {
 				zbuffer->setZ(py, px, depth);
 				P3 pSurf = screenPoint3d + (camDir*depth);
-				Color objectColor;
+				RGBColor objectColor;
 				P3 bumpedNormal;
 				model->surfaceColorAndBump(object3D, pSurf, &objectColor, &bumpedNormal);
-				Color res(0,0,0);
+				RGBColor res(0,0,0);
 				for(std::vector<LightSource *>::iterator it = lights.begin(); it != lights.end(); it++) {
-					Color lightContrib = (*it)->getReflection(pSurf, bumpedNormal, camPos, objectColor);
+					RGBColor lightContrib = (*it)->getReflection(pSurf, bumpedNormal, camPos, objectColor);
 					res = res + lightContrib;
 				}
 				res.checkBounds();

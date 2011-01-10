@@ -24,7 +24,7 @@
 #include "Screen.h"
 #include "Object3DRenderer.h"
 #include "Manager.h"
-#include "Color.h"
+#include "RGBColor.h"
 #include "Object3D.h"
 #include "Sphere.h"
 #include "Plane.h"
@@ -44,7 +44,7 @@ public:
 private:
 	std::string fileName;
 	P3 jsonToP3(Json::Value & p3JSON);
-	Color jsonToColor(Json::Value & colorJSON);
+	RGBColor jsonToColor(Json::Value & colorJSON);
 	Material jsonToMaterial(Json::Value & materialJSON);
 	bool parseObjFile(std::string & filename, std::vector<Triangle*> * triangles, P3 & centerObj, double scale);
 };

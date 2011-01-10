@@ -14,6 +14,9 @@ public:
 	double getReflectivity();
 	double getTransmittance();
 	double getRefractiveIndex();
+	void setReflectivity(double reflectivity);
+	void setTransmittance(double transmittance);
+	void setRefractiveIndex(double refractiveIndex);
 
 private:
 	double reflectivity;

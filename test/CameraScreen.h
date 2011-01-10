@@ -24,7 +24,6 @@ public:
 
 protected:
 	virtual void reinit();
-	Camera * camera;
 	Screen * screen;
 	double screenDist;
 	P3 centerScreen;

@@ -12,7 +12,7 @@ WinBufferedScreen::~WinBufferedScreen() {
 
 }
 
-void WinBufferedScreen::setPixel(int x, int y, Color & c) {
+void WinBufferedScreen::setPixel(int x, int y, RGBColor & c) {
 	if ( (x>=0) && (x<width) ) {
 		if ( (y>=0) && (y<height) ) {
 			int R = int((c.m_R)*255);

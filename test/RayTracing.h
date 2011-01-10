@@ -6,6 +6,7 @@
 #include "Screen.h"
 #include "CameraScreen.h"
 #include "SceneRenderer.h"
+#include "RGBColor.h"
 
 class RayTracing: public RenderingMethod
 {
@@ -16,7 +17,7 @@ public:
 	bool intersectObject(std::vector<Object3D *> & objects, Ray & ray, Object3D ** closestObj, double * yMin);
 
 protected:
-	Color throwRay(SceneRenderer * sceneRenderer, Ray & ray, int depth);
+	RGBColor throwRay(SceneRenderer * sceneRenderer, Ray & ray, int depth);
 	int maxDepth;
 };
 

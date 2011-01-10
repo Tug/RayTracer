@@ -23,9 +23,8 @@ Plane::Plane(P3 & A, P3 & B, P3 & C) : Object3D() {
 	this->p = A;
 	P3 AB(A,B);
 	P3 AC(A,C);
-	AB.normalize();
-	AC.normalize();
 	this->normal = AB ^ AC;
+	normal.normalize();
 	computeUV();
 }
 

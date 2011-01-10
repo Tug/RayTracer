@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Sphere.h"
+#include "SphereModel.h"
 
 namespace test {
 
@@ -24,6 +25,12 @@ namespace test {
 			//
 			//TODO: Add the constructor code here
 			//
+			P3 c = sphere->getCenter();
+			double radius = sphere->getRadius();
+			this->cxBox->Text = c.x.ToString();
+			this->cyBox->Text = c.y.ToString();
+			this->czBox->Text = c.z.ToString();
+			this->radiusBox->Text = radius.ToString();
 		}
 
 	protected:
@@ -220,16 +227,10 @@ namespace test {
 				 }
 				 sphere->setCenter(P3(cx, cy, cz));
 				 sphere->setRadius(radius);
-				 this->Hide();
+				 this->onObject3DEditionFinished();
+				 this->Close();
 			 }
-	public: System::Windows::Forms::DialogResult ShowDialog() {
-				 P3 c = sphere->getCenter();
-				 double radius = sphere->getRadius();
-				 this->cxBox->Text = c.x.ToString();
-				 this->cyBox->Text = c.y.ToString();
-				 this->czBox->Text = c.z.ToString();
-				 this->radiusBox->Text = radius.ToString();
-				 return System::Windows::Forms::Form::ShowDialog();
-			}
+	public: delegate void ApplyEditionDelegate();
+	public: ApplyEditionDelegate^ onObject3DEditionFinished;
 };
 }
