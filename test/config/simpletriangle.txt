@@ -1,0 +1,32 @@
+{
+  "scene": {
+    "backgroundColor": {"m_R": 0, "m_G": 0, "m_B": 0}
+    ,"lights": {
+      "alight": {"type":"AmbientLightSource", "color": {"m_R": 1, "m_G": 1, "m_B": 1}, "diffuseCoef": 0.5}
+      ,"plight1": {"type":"PointLightSource", "color": {"m_R": 1, "m_G": 1, "m_B": 1}, "position": {"x":700, "y":0, "z":200}}
+    }
+    ,"objects": {
+      "triangle1": {"type": "Triangle", "A": {"x":400, "y":200, "z":200}, "B": {"x":500, "y":200, "z":200}, "C": {"x":500, "y":200, "z":100}}
+      ,"triangle2": {"type": "Triangle", "A": {"x":400, "y":200, "z":200}, "B": {"x":400, "y":200, "z":100}, "C": {"x":500, "y":200, "z":100}}
+      
+      ,"triangle3": {"type": "Triangle", "A": {"x":200, "y":200, "z":300}, "B": {"x":400, "y":200, "z":300}, "C": {"x":400, "y":200, "z":200}}
+      ,"triangle4": {"type": "Triangle", "A": {"x":200, "y":200, "z":300}, "B": {"x":200, "y":200, "z":200}, "C": {"x":400, "y":200, "z":200}}
+    }
+  }
+  ,"sceneRenderer" : {
+    "camera": {
+		  "position": {"x":350, "y":-100, "z":200}
+		  ,"direction": {"x":0, "y":1, "z":0}
+		  ,"rotation": 0
+		}
+    ,"cameraScreenDist": 200
+    ,"method": {"type": "RayTracing"}
+    ,"models": {
+      "trianglemodel": {
+        "type": "PlaneModel"
+        ,"objects": [ "triangle1", "triangle2", "triangle3", "triangle4" ]
+        ,"color": "WHITE"
+      }
+    }
+  }
+}
